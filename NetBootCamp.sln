@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwitchPatterns", "Lesson3\SwitchPatterns\SwitchPatterns.csproj", "{4834B614-4B87-4241-A511-38BE58F776F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NullableTypes", "Lesson3\NullableTypes\NullableTypes.csproj", "{CE23B12A-8D1B-4009-B614-9D9DF171E429}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4834B614-4B87-4241-A511-38BE58F776F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4834B614-4B87-4241-A511-38BE58F776F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4834B614-4B87-4241-A511-38BE58F776F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE23B12A-8D1B-4009-B614-9D9DF171E429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE23B12A-8D1B-4009-B614-9D9DF171E429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE23B12A-8D1B-4009-B614-9D9DF171E429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE23B12A-8D1B-4009-B614-9D9DF171E429}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
