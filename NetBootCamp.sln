@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwitchPatterns", "Lesson3\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NullableTypes", "Lesson3\NullableTypes\NullableTypes.csproj", "{CE23B12A-8D1B-4009-B614-9D9DF171E429}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operators", "Lesson3\Operators\Operators.csproj", "{3F1EF09C-377E-4B02-9F65-D446089D2E8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CE23B12A-8D1B-4009-B614-9D9DF171E429}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE23B12A-8D1B-4009-B614-9D9DF171E429}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE23B12A-8D1B-4009-B614-9D9DF171E429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F1EF09C-377E-4B02-9F65-D446089D2E8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F1EF09C-377E-4B02-9F65-D446089D2E8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F1EF09C-377E-4B02-9F65-D446089D2E8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F1EF09C-377E-4B02-9F65-D446089D2E8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
