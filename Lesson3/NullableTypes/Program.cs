@@ -47,8 +47,10 @@ Console.WriteLine(a);
 b = b ?? c;
 Console.WriteLine(b);
 
-// 6 
+// 6
 int? d = default;
 b = default;
 a = d ?? (b ?? c);
 Console.WriteLine(a);
+
+Console.WriteLine( int.Parse( Console.ReadLine()! ) );
