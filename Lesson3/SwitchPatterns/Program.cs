@@ -1,4 +1,4 @@
-﻿int a = int.Parse(Console.ReadLine()!); //! qiymat kiritishimiz aniq null qiymatga ega bolmaydi
+﻿int a = int.Parse(Console.ReadLine()!); //! qiymat kiritishimiz aniq, null qiymatga ega bolmaydi
 
 int b = 8;
 

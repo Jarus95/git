@@ -1,7 +1,7 @@
 ﻿bool a = true;
 bool b = !a;
 
-if(b) // b ni qiymati endi false
+if(b) // b ni qiymati false
     Console.WriteLine("True");
 
 bool c = a || b;
@@ -13,10 +13,10 @@ bool c = a || b;
 
 c = a && b;
 
-// 1 || 1 = 1
-// 1 || 0 = 0
-// 0 || 1 = 0
-// 0 || 0 = 0
+// 1 && 1 = 1
+// 1 && 0 = 0
+// 0 && 1 = 0
+// 0 && 0 = 0
 
 c = !c || !a && b || (a && b);
 
