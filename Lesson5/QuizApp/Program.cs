@@ -24,7 +24,14 @@ string GetUserName()
 void AddUser(string name, string count)
 {
     statistika[currentIndex] = new string[] { name, count };
-    currentIndex++;
+
+    QoshibBor();
+
+    void QoshibBor()
+    {
+        currentIndex++;
+    }
 }
 
 Show(menu);
+

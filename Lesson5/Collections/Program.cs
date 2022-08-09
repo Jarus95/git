@@ -1,5 +1,10 @@
 ﻿List<int> sonlar = new List<int>();
-List<string> sozlar = new List<string>(){"a", "r"};
+List<string> sozlar = new List<string>()
+{
+    "sd",
+    "ds"
+};
+
 List<char> letters = new List<char>() { 'a', 'f' , '3'};
 
 var belgi = letters[1]; // belgi = 'f';
