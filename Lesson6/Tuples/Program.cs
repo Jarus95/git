@@ -1,12 +1,12 @@
-﻿int a = 7;
-int b = 8;
+﻿var a = 7;
+var b = 8;
 
 int Add(int a, int b)
 {
     return a + b;
 }
 
-Tuple<int, string> addResult = 
+var addResult =
     new Tuple<int, string>(1, "Add");
 
 Tuple<int, int, string> result;
@@ -18,19 +18,12 @@ Console.WriteLine(add);
 
 Tuple<int, int> Calculate(int a, int b)
 {
-    var add = a + b;
-    var divide = a / b;
-
-    var result = new Tuple<int, int>(add, divide);
-
-    return result;
+    return new Tuple<int, int>(a + b, a / b);
 }
 
-Tuple<int, int> Result = Calculate(4, 2);
-var Result2 = Calculate(4, 2);
+var result2 = Calculate(4, 2);
+var result3 = Calculate(4, 2);
 
 var (add2, divide) = Calculate(9, 3);
 
-Console.WriteLine(add2 +" " + divide);
-
-
+Console.WriteLine(add2 + " " + divide);
