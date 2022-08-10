@@ -1,5 +1,11 @@
 ﻿List<string[]> questions = new List<string[]>();
-var statistics = new List<Tuple<string, int, int>>();
+var statistics = new List<Tuple<string, int>>() 
+{
+    new Tuple<string, int>("men",100),
+    new Tuple<string, int>("jfa",20),
+    new Tuple<string, int>("kimdr",40)
+};
+
 string password = "123asd";
 
 AddDefaultQuestions(questions);
@@ -65,7 +71,7 @@ void StartQuiz()
 
     Console.WriteLine("Togri javoblar soni : {0}", togriJavoblarSoni);
 
-    var user = new Tuple<string, int, int>(name, togriJavoblarSoni, questions.Count);
+    var user = new Tuple<string, int>(name, (int)((double)togriJavoblarSoni/questions.Count * 100));
     statistics.Add(user);
 
     Console.WriteLine("Menu uchun 'Enter' bosing.");
@@ -133,11 +139,14 @@ void Statistics()
     void ShowStatistics()
     {
         if (statistics!.Count > 0)
+        {
+            statistics = statistics.OrderByDescending(element => element.Item2).ToList();
             for (var i = 0; i < statistics.Count; i++)
             {
-                var (ism, togriJavoblarSoni, umumiySavollarSoni) = statistics[i];
-                Console.WriteLine($"{i + 1}. {ism} {togriJavoblarSoni}/{umumiySavollarSoni}");
+                var (ism, togriJavoblarFoizi) = statistics[i];
+                Console.WriteLine($"{i + 1}. {ism} {togriJavoblarFoizi}%");
             }
+        }
         else
             Console.WriteLine("Hich kim ishlamadi.");
 
