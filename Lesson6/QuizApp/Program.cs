@@ -10,9 +10,6 @@ string password = "123asd";
 
 AddDefaultQuestions(questions);
 
-File.WriteAllLines("s.txt", new string[] { });
-var lines = File.ReadAllLines("s.txt");
-
 Start();
 
 void ChooseMenu()
