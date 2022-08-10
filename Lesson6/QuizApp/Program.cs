@@ -1,5 +1,6 @@
 ﻿List<string[]> questions = new List<string[]>();
 var statistics = new List<Tuple<string, int, int>>();
+string password = "123asd";
 
 AddDefaultQuestions(questions);
 
@@ -18,6 +19,7 @@ void ChooseMenu()
         case Menu.AddQuestion: AddQuestion(); break;
         case Menu.Dashboard: Dashboard(); break;
         case Menu.Statistics: Statistics(); break;
+        case Menu.Close: return;
         default:
             {
                 Console.WriteLine("Mavjud bolmagan Menu tanlandi.");
@@ -54,7 +56,7 @@ void StartQuiz()
             Console.WriteLine("Javob notogri");
         }
 
-        Console.WriteLine(questions.Count - 1 == j 
+        Console.WriteLine(questions.Count - 1 == j
             ? "Natijani korish uchun 'Enter' bosing."
             : "Davom etish uchun 'Enter' bosing.");
 
@@ -65,7 +67,7 @@ void StartQuiz()
 
     var user = new Tuple<string, int, int>(name, togriJavoblarSoni, questions.Count);
     statistics.Add(user);
-    
+
     Console.WriteLine("Menu uchun 'Enter' bosing.");
     Console.ReadKey();
     Start();
@@ -73,6 +75,15 @@ void StartQuiz()
 
 void AddQuestion()
 {
+    Console.Write("Parolni kiriting : ");
+    var parol = Console.ReadLine();
+
+    if (password != parol)
+    {
+        Console.WriteLine("Parol notogri");
+        Start();
+    }
+
     Console.WriteLine("Savolni kiriting");
     var newQuestion = Console.ReadLine()!;
 
@@ -109,18 +120,38 @@ void Dashboard()
 
 void Statistics()
 {
-    if (statistics!.Count > 0)
-        for (var i = 0; i < statistics.Count; i++)
-        {
-            var (ism, togriJavoblarSoni, umumiySavollarSoni) = statistics[i];
-            Console.WriteLine($"{i + 1}. {ism} {togriJavoblarSoni}/{umumiySavollarSoni}");
-        }
-    else
-        Console.WriteLine("Hich kim ishlamadi.");
+    Console.WriteLine("Statistics : ");
+    ShowMenuStatistics();
 
-    Console.WriteLine("Menu uchun 'Enter' bosing.");
-    Console.ReadKey();
-    Start();
+    var input = (Menu)(int.Parse(Console.ReadLine()!) + 5);
+    switch (input)
+    {
+        case Menu.Show: ShowStatistics(); break;
+        case Menu.Clear: ClearStatistics(); break;
+    }
+
+    void ShowStatistics()
+    {
+        if (statistics!.Count > 0)
+            for (var i = 0; i < statistics.Count; i++)
+            {
+                var (ism, togriJavoblarSoni, umumiySavollarSoni) = statistics[i];
+                Console.WriteLine($"{i + 1}. {ism} {togriJavoblarSoni}/{umumiySavollarSoni}");
+            }
+        else
+            Console.WriteLine("Hich kim ishlamadi.");
+
+        Console.WriteLine("Menu uchun 'Enter' bosing.");
+        Console.ReadKey();
+        Start();
+    }
+
+    void ClearStatistics()
+    {
+        statistics.Clear();
+        Console.WriteLine("Cleared.");
+        Start();
+    }
 }
 
 void AddDefaultQuestions(List<string[]> questions)
@@ -138,13 +169,21 @@ void Start()
     ShowMenu(Menu.AddQuestion);
     ShowMenu(Menu.Dashboard);
     ShowMenu(Menu.Statistics);
+    ShowMenu(Menu.Close);
 
     ChooseMenu();
 }
 
-void ShowMenu(Menu menu)
+void ShowMenuStatistics()
 {
-    Console.WriteLine($"{(int)menu}. {menu}");
+    Console.WriteLine();
+    ShowMenu(Menu.Show, 5);
+    ShowMenu(Menu.Clear, 5);
+}
+
+void ShowMenu(Menu menu, int i = 0)
+{
+    Console.WriteLine($"{(int)menu - i}. {menu}");
 }
 
 enum Menu
@@ -152,5 +191,8 @@ enum Menu
     StartQuiz = 1,
     AddQuestion,
     Dashboard,
-    Statistics
+    Statistics,
+    Close,
+    Show,
+    Clear
 }
