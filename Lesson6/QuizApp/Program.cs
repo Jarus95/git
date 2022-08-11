@@ -1,4 +1,6 @@
-﻿List<string[]> questions = new List<string[]>();
+﻿using System.Net.Mime;
+
+List<string[]> questions = new List<string[]>();
 var statistics = new List<Tuple<string, int>>() 
 {
     new Tuple<string, int>("men",100),
@@ -6,9 +8,13 @@ var statistics = new List<Tuple<string, int>>()
     new Tuple<string, int>("kimdr",40)
 };
 
+Dictionary<string, string> appLang = GetLanguage();
+
 string password = "123asd";
 
 AddDefaultQuestions(questions);
+
+Console.WriteLine(appLang["key"]);
 
 Start();
 
@@ -22,7 +28,7 @@ void ChooseMenu()
         case Menu.AddQuestion: AddQuestion(); break;
         case Menu.Dashboard: Dashboard(); break;
         case Menu.Statistics: Statistics(); break;
-        case Menu.Close: return;
+        case Menu.Close: Environment.Exit(0); break;
         default:
             {
                 Console.WriteLine("Mavjud bolmagan Menu tanlandi.");
@@ -37,6 +43,8 @@ void StartQuiz()
     Console.Write("Ismingizni kiriting : ");
     var name = Console.ReadLine();
     int togriJavoblarSoni = 0;
+
+    var wrongList = new List<Tuple<string, string, string>>();
 
     for (var j = 0; j < questions.Count; j++)
     {
@@ -56,6 +64,10 @@ void StartQuiz()
         }
         else
         {
+            var correctIndex = int.Parse(questions[j][1]);
+            var wrong = new Tuple<string, string, string>(questions[j][0], questions[j][correctIndex], questions[j][answer]);
+            wrongList.Add(wrong);
+            
             Console.WriteLine("Javob notogri");
         }
 
@@ -68,8 +80,15 @@ void StartQuiz()
 
     Console.WriteLine("Togri javoblar soni : {0}", togriJavoblarSoni);
 
-    var user = new Tuple<string, int>(name, (int)((double)togriJavoblarSoni/questions.Count * 100));
-    statistics.Add(user);
+    foreach (var wrong in wrongList)
+    {
+        Console.WriteLine($"Savol :{wrong.Item1}, " +
+                          $"Togri javob: {wrong.Item2}, " +
+                          $"Siz kiritgan javob: {wrong.Item3}");
+    }
+
+    var user = new Tuple<string, int>(name!, (int)((double)togriJavoblarSoni/questions.Count * 100));
+    statistics!.Add(user);
 
     Console.WriteLine("Menu uchun 'Enter' bosing.");
     Console.ReadKey();
@@ -89,10 +108,10 @@ void AddQuestion()
 
     Console.WriteLine("Savolni kiriting");
     var newQuestion = Console.ReadLine()!;
-
+    
     Console.WriteLine("Variantlarni kiriting.");
-    Console.WriteLine("Masalan: 3 5 6 78");
-    var choices = Console.ReadLine()!.Split();
+    Console.WriteLine("Masalan: javob 3, 5 variant, olti, 78");
+    var choices = Console.ReadLine()!.Split(',');
 
     Console.WriteLine("Togri javob indeksi kiriting");
     var correctAnswerIndex = int.Parse(Console.ReadLine()!) + 1;
@@ -154,7 +173,7 @@ void Statistics()
 
     void ClearStatistics()
     {
-        statistics.Clear();
+        statistics!.Clear();
         Console.WriteLine("Cleared.");
         Start();
     }
@@ -190,6 +209,36 @@ void ShowMenuStatistics()
 void ShowMenu(Menu menu, int i = 0)
 {
     Console.WriteLine($"{(int)menu - i}. {menu}");
+}
+
+Dictionary<string, string> GetLanguage()
+{
+    Console.WriteLine("Tilni tanla");
+    Console.WriteLine("1. Uzbek \n2. Russian \n3. English");
+
+    Dictionary<string, string> uzbek = new Dictionary<string, string>()
+    {
+        {"key","Value"},
+        {"menu","Mundarija"},
+    };
+
+    Dictionary<string, string> english = new Dictionary<string, string>()
+    {
+        {"key","Value"},
+        {"menu","Menu"},
+    };
+
+    Dictionary<string, string> russian = new Dictionary<string, string>()
+    {
+        {"key","Qiymat rus tilida"},
+        {"menu","Menu"},
+    };
+
+    int input = int.Parse(Console.ReadLine()!);
+    if (input == 1) return uzbek;
+    if (input == 3) return english;
+    if (input == 2) return russian;
+    return uzbek;
 }
 
 enum Menu
