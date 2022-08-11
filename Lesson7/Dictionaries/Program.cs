@@ -18,7 +18,7 @@ Dictionary<string, string> english = new Dictionary<string, string>()
 {
     {"menu", "Menu"},
     {"correct", "Correct"},
-    //{"correct", "Correct"} - key bir hil bulishi mumkin emas
+    //{"correct", "Correct"} - key bir xil bo'lishi mumkin emas
 };
 
 Dictionary<string, string> appLang;
