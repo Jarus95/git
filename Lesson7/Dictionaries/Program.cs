@@ -7,6 +7,12 @@ Dictionary<string, string> russian = new Dictionary<string, string>();
 russian.Add("menu", "Menu");
 russian.Add("correct", "Pravilna");
 russian.Add("answer", "Atvet");
+russian.Add("javob", "siz {0} ni {1} + {2} = {3} kiritingiz");
+
+int ab = 8;
+Console.WriteLine(string.Format(russian["javob"], ab, 2, 3));
+
+// siz 8 ni 2 + 3 =  kiritingiz
 
 string b = string.Empty;
 string a = default;
