@@ -15,11 +15,11 @@ a *= 8; // a = a * 8;
 a /= 2; // a = a / 2;
 
 // % 
-
+a = 9;
 a %= 3; // a = a % 3;
 Console.WriteLine(a);
 
-bool b = a > 5;
+bool b = 21 >= 5;
 b = a <= 1;
 
 b = a > 2 && 1 == int.Parse(null);

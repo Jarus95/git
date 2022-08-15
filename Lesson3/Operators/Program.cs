@@ -6,6 +6,7 @@ if(b) // b ni qiymati false
 
 bool c = a || b;
 
+// yoki
 // 1 || 1 = 1
 // 1 || 0 = 1
 // 0 || 1 = 1

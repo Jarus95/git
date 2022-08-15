@@ -21,5 +21,30 @@
         return ToPercent() + "%";
     }
 
+    public string ToStringPercent(string text)
+    {
+        return ToPercent() + $"% {text}.";
+    }
+
+    public string ToStringPercent(string text, int index)
+    {
+        return ToPercent() + $"% {text}.";
+    }
+
+    public string ToStringPercent(int index = 0)
+    {
+        return ToPercent() + $"% {index}.";
+    }
+
+    public User Copy()
+    {
+        /*var copy = new User();
+        copy.Name = Name;
+        copy.CorrectAnswersCount = CorrectAnswersCount;
+        copy.QuestionsCount = QuestionsCount;*/
+
+        return this;
+    }
+    
     // 80% ishlagan
 }

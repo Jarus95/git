@@ -1,6 +1,26 @@
 ﻿/*
  * QuizApp with struct
  */
+User user1 = new User()
+{
+    Name = "Ismi",
+    QuestionsCount = 4,
+    CorrectAnswersCount = 3
+};
+
+Console.WriteLine(user1.ToStringPercent());
+Console.WriteLine(user1.ToStringPercent("ieshlagan"));
+Console.WriteLine(user1.ToStringPercent("ishlagan", 2));
+Console.WriteLine(user1.ToStringPercent(1));
+
+Change(user1);
+
+Console.WriteLine(user1.Name); // Ismi
+
+void Change(User user)
+{
+    user.Name = "Changed";
+}
 
 List<Question> questions = new List<Question>();
 List<User> statistics = new List<User>()
@@ -11,29 +31,27 @@ List<User> statistics = new List<User>()
 };
 
 Dictionary<string, string> appLang = GetLanguage();
-
 string password = "123asd";
 
 AddDefaultQuestions(questions);
 
 Console.WriteLine(appLang["key"]);
-
 Start();
 
 void ChooseMenu()
 {
-    var input = (Menu)int.Parse(Console.ReadLine()!);
+    var input = (EMenu)int.Parse(Console.ReadLine()!);
 
     switch (input)
     {
-        case Menu.StartQuiz: StartQuiz(); break;
-        case Menu.AddQuestion: AddQuestion(); break;
-        case Menu.Dashboard: Dashboard(); break;
-        case Menu.Statistics: Statistics(); break;
-        case Menu.Close: Environment.Exit(0); break;
+        case EMenu.StartQuiz: StartQuiz(); break;
+        case EMenu.AddQuestion: AddQuestion(); break;
+        case EMenu.Dashboard: Dashboard(); break;
+        case EMenu.Statistics: Statistics(); break;
+        case EMenu.Close: Environment.Exit(0); break;
         default:
             {
-                Console.WriteLine("Mavjud bolmagan Menu tanlandi.");
+                Console.WriteLine("Mavjud bolmagan EMenu tanlandi.");
                 Start();
             }
             break;
@@ -96,7 +114,7 @@ void StartQuiz()
     var user = new User(name!, togriJavoblarSoni, questions.Count);
     statistics.Add(user);
 
-    Console.WriteLine("Menu uchun 'Enter' bosing.");
+    Console.WriteLine("EMenu uchun 'Enter' bosing.");
     Console.ReadKey();
     Start();
 }
@@ -124,6 +142,7 @@ void AddQuestion()
     Console.WriteLine("Togri javob indeksi kiriting");
     question.CorrectAnswerIndex = int.Parse(Console.ReadLine()!) + 1;
 
+    questions.Add(question);
     Console.WriteLine("Savol qoshildi.");
     Start();
 }
@@ -143,11 +162,11 @@ void Statistics()
     Console.WriteLine("Statistics : ");
     ShowMenuStatistics();
 
-    var input = (Menu)(int.Parse(Console.ReadLine()!) + 5);
+    var input = (EMenu)(int.Parse(Console.ReadLine()!) + 5);
     switch (input)
     {
-        case Menu.Show: ShowStatistics(); break;
-        case Menu.Clear: ClearStatistics(); break;
+        case EMenu.Show: ShowStatistics(); break;
+        case EMenu.Clear: ClearStatistics(); break;
     }
 
     void ShowStatistics()
@@ -164,7 +183,7 @@ void Statistics()
         else
             Console.WriteLine("Hich kim ishlamadi.");
 
-        Console.WriteLine("Menu uchun 'Enter' bosing.");
+        Console.WriteLine("EMenu uchun 'Enter' bosing.");
         Console.ReadKey();
         Start();
     }
@@ -187,11 +206,11 @@ void AddDefaultQuestions(List<Question> questions)
 void Start()
 {
     Console.WriteLine();
-    ShowMenu(Menu.StartQuiz);
-    ShowMenu(Menu.AddQuestion);
-    ShowMenu(Menu.Dashboard);
-    ShowMenu(Menu.Statistics);
-    ShowMenu(Menu.Close);
+    ShowMenu(EMenu.StartQuiz);
+    ShowMenu(EMenu.AddQuestion);
+    ShowMenu(EMenu.Dashboard);
+    ShowMenu(EMenu.Statistics);
+    ShowMenu(EMenu.Close);
 
     ChooseMenu();
 }
@@ -199,11 +218,11 @@ void Start()
 void ShowMenuStatistics()
 {
     Console.WriteLine();
-    ShowMenu(Menu.Show, 5);
-    ShowMenu(Menu.Clear, 5);
+    ShowMenu(EMenu.Show, 5);
+    ShowMenu(EMenu.Clear, 5);
 }
 
-void ShowMenu(Menu menu, int i = 0)
+void ShowMenu(EMenu menu, int i = 0)
 {
     Console.WriteLine($"{(int)menu - i}. {menu}");
 }
@@ -222,13 +241,13 @@ Dictionary<string, string> GetLanguage()
     Dictionary<string, string> english = new Dictionary<string, string>()
     {
         {"key","Value"},
-        {"menu","Menu"},
+        {"menu","EMenu"},
     };
 
     Dictionary<string, string> russian = new Dictionary<string, string>()
     {
         {"key","Qiymat rus tilida"},
-        {"menu","Menu"},
+        {"menu","EMenu"},
     };
 
     int input = int.Parse(Console.ReadLine()!);
@@ -236,15 +255,4 @@ Dictionary<string, string> GetLanguage()
     if (input == 3) return english;
     if (input == 2) return russian;
     return uzbek;
-}
-
-enum Menu
-{
-    StartQuiz = 1,
-    AddQuestion,
-    Dashboard,
-    Statistics,
-    Close,
-    Show,
-    Clear
 }
