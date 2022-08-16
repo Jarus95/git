@@ -4,6 +4,7 @@
     AddQuestion = 2,
     Dashboard,
     Statistics,
+    Users,
     Close,
     Show,
     Clear

@@ -19,18 +19,24 @@ async Task GetUpdate(Update update)
     var text = update.Message.Text;
     var chatId = update.Message.Chat.Id;
 
-    var user = new User();
-    user.Id = chatId;
-    user.Name = string.IsNullOrEmpty(update.Message.From.Username)
-        ? update.Message.From.FirstName
-        : update.Message.From.Username;
-    users.Add(chatId, user);
+    if (!users.ContainsKey(chatId))
+    {
+        string name = string.IsNullOrEmpty(update.Message.From.Username)
+            ? update.Message.From.FirstName
+            : "@" + update.Message.From.Username;
+
+        SaveUser(chatId, name, 0);
+    }
+
+    //if(users.step== 2)
+    //text savol deb qabul split Questiondan obyekt yaratib questionsga qoshamiz
 
     switch (text)
     {
         case "menu": ShowMenu(chatId); break;
         case "2": AddQuestion(chatId); break;
         case "3": ShowDashboard(chatId); break;
+        case "5": ShowUsers(chatId); break;
     }
 }
 
@@ -47,6 +53,7 @@ void ShowMenu(long chatId)
         EMenu.AddQuestion,
         EMenu.Dashboard,
         EMenu.Statistics,
+        EMenu.Users,
         EMenu.Close
     };
 
@@ -86,4 +93,26 @@ void AddQuestion(long chatId)
     string addQuestionText = "Savolni quyidagi tartibda kiriting : ";
     addQuestionText += "1 + 4 = ?, 2, 12, 14, 5, 6";
     SendMessage(chatId, addQuestionText);
+
+    //setstep(2)
+}
+
+void SaveUser(long chatId, string name, int step)
+{
+    users.Add(chatId, new User(chatId, name, step));
+}
+
+void ShowUsers(long chatId)
+{
+    var message = "Foydalanuvchilar royxati: \n";
+
+    var usersText = "";
+    for (int i = 0; i < users.Values.Count; i++)
+    {
+        usersText += users.Values.ElementAt(i).ToText() + "\n";
+    }
+
+    message += usersText;
+
+    SendMessage(chatId, message);
 }
