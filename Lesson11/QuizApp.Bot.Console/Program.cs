@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 
 List<Question> questions = new List<Question>();
@@ -8,11 +7,15 @@ AddDefaultQuestion();
 Dictionary<long, User> users = new Dictionary<long, User>();
 
 string botToken = "5370553846:AAHOhXhasQ5V9s1nt4tjl7aTPjr6tloqSAs";
+
+var tokenSource = new CancellationTokenSource();
 TelegramBotClient bot = new TelegramBotClient(botToken);
 bot.StartReceiving(
-    updateHandler: (client, update, token) => GetUpdate(update),
-    errorHandler: (client, exception, token) => Task.CompletedTask);
+    updateHandler: (_, update, _) => GetUpdate(update),
+    errorHandler: (_, _, _) => Task.CompletedTask,
+    cancellationToken: tokenSource.Token);
 Console.ReadKey();
+tokenSource.Cancel();
 
 async Task GetUpdate(Update update)
 {
@@ -87,7 +90,7 @@ void ShowDashboard(long chatId)
 
     for (int i = 0; i < questions.Count; i++)
     {
-        questionsText += $"{i+1}. {questions[i].QuestionText}\n";
+        questionsText += $"{i + 1}. {questions[i].QuestionText}\n";
     }
 
     message += questionsText;
@@ -109,7 +112,7 @@ void AddNewQuestion(long chatId, string question)
     string[] questionArr = question.Split(',');
     if (questionArr.Length >= 4)
     {
-        Question newQuestion = new Question(questionArr[0], 
+        Question newQuestion = new Question(questionArr[0],
             int.Parse(questionArr[1]),
             questionArr.Skip(2).ToList());
 
@@ -118,7 +121,7 @@ void AddNewQuestion(long chatId, string question)
         SetStep(chatId, 0);
         return;
     }
-    
+
     AddQuestion(chatId);
 }
 
