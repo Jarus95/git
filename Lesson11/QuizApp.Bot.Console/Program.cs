@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using System.Reflection.Metadata.Ecma335;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 
 List<Question> questions = new List<Question>();
@@ -30,6 +31,12 @@ async Task GetUpdate(Update update)
 
     //if(users.step== 2)
     //text savol deb qabul split Questiondan obyekt yaratib questionsga qoshamiz
+
+    if (users[chatId].Step == 2)
+    {
+        // user savol junatgan uni saqlash kk
+        AddNewQuestion(chatId, text!);
+    }
 
     switch (text)
     {
@@ -94,7 +101,25 @@ void AddQuestion(long chatId)
     addQuestionText += "1 + 4 = ?, 2, 12, 14, 5, 6";
     SendMessage(chatId, addQuestionText);
 
-    //setstep(2)
+    SetStep(chatId, 2);
+}
+
+void AddNewQuestion(long chatId, string question)
+{
+    string[] questionArr = question.Split(',');
+    if (questionArr.Length >= 4)
+    {
+        Question newQuestion = new Question(questionArr[0], 
+            int.Parse(questionArr[1]),
+            questionArr.Skip(2).ToList());
+
+        questions.Add(newQuestion);
+        SendMessage(chatId, "Savol qoshildi.");
+        SetStep(chatId, 0);
+        return;
+    }
+    
+    AddQuestion(chatId);
 }
 
 void SaveUser(long chatId, string name, int step)
@@ -116,3 +141,11 @@ void ShowUsers(long chatId)
 
     SendMessage(chatId, message);
 }
+
+void SetStep(long chatId, int step)
+{
+    var user = users[chatId];
+    user.SetStep(step);
+    users[chatId] = user;
+}
+
