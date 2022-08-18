@@ -19,8 +19,18 @@
         ChatId = chatId;
     }
 
+    public void SetStep(int step)
+    {
+        Step = step;
+    }
+
     public string ToText()
     {
         return $"Id: {ChatId}, Name: {Name}, step: {Step}";
+    }
+
+    public string ToText(bool split)
+    {
+        return $"{ChatId},{Name},{Step}";
     }
 }

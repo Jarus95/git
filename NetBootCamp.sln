@@ -71,13 +71,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson11", "Lesson11", "{2E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizApp.Bot.Console", "Lesson11\QuizApp.Bot.Console\QuizApp.Bot.Console.csproj", "{5A65EA83-9B65-4842-8A60-8DF89D3C39F9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson12", "Lesson12", "{650D6514-A494-4F01-867A-2E02F7FFF920}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson12_13", "Lesson12_13", "{650D6514-A494-4F01-867A-2E02F7FFF920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classes", "Lesson12\Classes\Classes.csproj", "{763C6815-7553-4747-A87E-43A764519998}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Classes", "Lesson12\Classes\Classes.csproj", "{763C6815-7553-4747-A87E-43A764519998}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizApp.Bot.Console", "Lesson12\QuizApp.Bot.Console\QuizApp.Bot.Console.csproj", "{E5F25BEC-4B13-41F2-A0FF-4E5A3770236B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizApp.Bot.Console", "Lesson12\QuizApp.Bot.Console\QuizApp.Bot.Console.csproj", "{E5F25BEC-4B13-41F2-A0FF-4E5A3770236B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WritingReadingFiles", "Lesson12\WritingReadingFiles\WritingReadingFiles.csproj", "{A88BC311-AF82-4271-9B71-121490C3916A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WritingReadingFiles", "Lesson12\WritingReadingFiles\WritingReadingFiles.csproj", "{A88BC311-AF82-4271-9B71-121490C3916A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
