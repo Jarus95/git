@@ -12,8 +12,6 @@ async Task GetUpdate(Update update)
 {
     if (update.Type != UpdateType.Message) return;
 
-    bot.SendMessage(update.Message.Chat.Id, "a", new InlineKeyboardMarkup(new[] { new []{new InlineKeyboardButton("sd")}}));
-
     var user = GetUser(update);
 
     var message = update.Message!.Text!;
