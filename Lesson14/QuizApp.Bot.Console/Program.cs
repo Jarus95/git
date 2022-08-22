@@ -11,20 +11,36 @@ Console.ReadKey();
 
 void GetUpdate(Update update)
 {
+    if (update.Type == UpdateType.CallbackQuery)
+    {
+        var data = update.CallbackQuery!.Data!.Split(',').Select(int.Parse).ToArray();
+        var answer = db.CheckAnswer(data[0], data[1]);
+
+        var msgId = update.CallbackQuery.Message.MessageId;
+        var chatID = update.CallbackQuery.Message.Chat.Id;
+        var reply = update.CallbackQuery.Message.ReplyMarkup;
+        
+        bot.EditMessageReplyMarkup(chatID, msgId, SetResultToButton(reply, data[1], answer));
+        SendQuestion(chatID, data[0] + 1);
+    }
+
     if (update.Type != UpdateType.Message) return;
 
     var chatId = update.Message!.Chat.Id;
+    SendQuestion(chatId, 0);
+}
 
-    var (message, buttons) = GetQuestionMessage(3);
-    bot.SendPhoto(chatId, db.GetQuestionImageStream(3));
-    bot.SendMessage(chatId, message, buttons);
+void SendQuestion(long chatId, int questionIndex)
+{
+    var (message, buttons) = GetQuestionMessage(questionIndex);
+    bot.SendPhoto(chatId, db.GetQuestionImageStream(questionIndex), message, buttons);
 }
 
 Tuple<string, InlineKeyboardMarkup> GetQuestionMessage(int index)
 {
     var question = db.Questions![index];
     var choicesText = question.Choices.Select(c => c.Text).ToList();
-    return new (question.Question, GetInlineButtons(choicesText));
+    return new(question.Question, GetInlineButtons(choicesText, index));
 }
 
 InlineKeyboardMarkup GetInlineButtons(List<string> buttonsText, int? questionIndex = null)
@@ -38,4 +54,12 @@ InlineKeyboardMarkup GetInlineButtons(List<string> buttonsText, int? questionInd
     }
 
     return new InlineKeyboardMarkup(buttons);
+}
+
+InlineKeyboardMarkup SetResultToButton(InlineKeyboardMarkup  buttons, int choiceIndex, bool answer)
+{
+    var buttonsList = buttons.InlineKeyboard.ToList();
+    buttonsList[choiceIndex].ToList()[0].Text += answer ? " ✅" : " ❌";
+
+    return buttons;
 }

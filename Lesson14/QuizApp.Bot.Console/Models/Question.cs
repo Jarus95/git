@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace QuizApp.Bot.Console.Models
+﻿namespace QuizApp.Bot.Console.Models
 {
     public class QuestionEntity
     {

@@ -23,5 +23,13 @@ namespace QuizApp.Bot.Console.Services
             var bytes = File.ReadAllBytes($"{ImagesPath}/{image}.png");
             return new MemoryStream(bytes);
         }
+
+        public bool CheckAnswer(int questionIndex, int choiceIndex)
+        {
+            var question = Questions[questionIndex];
+            var choice = question.Choices[choiceIndex];
+
+            return choice.Answer;
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace QuizApp.Bot.Console.Services
 {
     public class TelegramBotService
     {
-        private string Token = "5370553846:AAHOhXhasQ5V9s1nt4tjl7aTPjr6tloqSAs";
+        private static string Token = "5481889693:AAH1-Wu_cRciv6_vLju-ULX7LvCaX33tIPA";
         private TelegramBotClient Bot;
 
         public TelegramBotService()
@@ -35,6 +35,19 @@ namespace QuizApp.Bot.Console.Services
         {
             if(stream == null) return;
             Bot.SendPhotoAsync(chatId, new InputOnlineFile(stream));
+        }
+
+        public void SendPhoto(long chatId, Stream? stream, string messageText, IReplyMarkup? reply = null)
+        {
+            if (stream != null)
+                Bot.SendPhotoAsync(chatId, new InputOnlineFile(stream), messageText, replyMarkup:reply);
+            else
+                Bot.SendTextMessageAsync(chatId, messageText, replyMarkup: reply);
+        }
+
+        public void EditMessageReplyMarkup(long chatId, int messageId, InlineKeyboardMarkup? reply)
+        {
+            Bot.EditMessageReplyMarkupAsync(chatId:chatId, messageId: messageId, replyMarkup:reply);
         }
     }
 }
