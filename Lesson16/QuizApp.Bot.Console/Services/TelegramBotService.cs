@@ -49,5 +49,6 @@ namespace QuizApp.Bot.Console.Services
         {
             Bot.EditMessageReplyMarkupAsync(chatId:chatId, messageId: messageId, replyMarkup:reply);
         }
+
     }
 }
