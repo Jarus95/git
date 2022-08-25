@@ -35,4 +35,33 @@ public class ExaminationsService
         _telegramBotService.SendMessage(user.ChatId, message, buttons);
         user.SetStep(EUserStep.Exam);
     }
+
+    public void SendTicketQuestion(User user)
+    {
+        Queue<QuestionEntity> ticketQueue = _exams[user.ChatId];
+        var question = ticketQueue.Dequeue();
+        SendQuestion(user, question);
+    }
+
+    public void SendQuestion(User user, QuestionEntity question)
+    {
+        var choices = question.Choices.Select(choice => choice.Text).ToList();
+        var correctChoice = question.Choices.First(choice => choice.Answer);
+        var correctAnswerIndex = question.Choices.IndexOf(correctChoice);
+
+        if (question.Media.Exist)
+        {
+            _telegramBotService.SendMessage(
+                chatId: user.ChatId,
+                message: question.Question,
+                image: Database.GetQuestionMedia(question.Media.Name),
+                reply: _telegramBotService.GetInlineKeyboard(choices, correctAnswerIndex));
+            return;
+        }
+
+        _telegramBotService.SendMessage(
+            chatId: user.ChatId,
+            message: question.Question,
+            reply: _telegramBotService.GetInlineKeyboard(choices, correctAnswerIndex));
+    }
 }

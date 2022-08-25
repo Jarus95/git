@@ -1,5 +1,5 @@
 ﻿using Avtotest.Bot.Console.Models;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Avtotest.Bot.Console.Databases;
 
@@ -7,6 +7,7 @@ public class Database
 {
     private const string UsersJsonPath = "JsonData/users.json";
     private const string QuestionsJsonPath = "JsonData/uzlotin.json";
+    private const string ImagesPath = "Images";
 
     private static UsersDatabase _usersDatabase;
     public static UsersDatabase UsersDb
@@ -43,7 +44,7 @@ public class Database
 
         try
         {
-            return JsonSerializer.Deserialize<List<User>>(json);
+            return JsonConvert.DeserializeObject<List<User>>(json);
         }
         catch
         {
@@ -59,7 +60,7 @@ public class Database
 
         try
         {
-            return JsonSerializer.Deserialize<List<QuestionEntity>>(json);
+            return JsonConvert.DeserializeObject<List<QuestionEntity>>(json);
         }
         catch
         {
@@ -70,7 +71,18 @@ public class Database
 
     public void SaveUsers()
     {
-        var json = JsonSerializer.Serialize(UsersDb.Users);
+        var json = JsonConvert.SerializeObject(UsersDb.Users);
         File.WriteAllText(UsersJsonPath, json);
+    }
+
+    public static Stream GetQuestionMedia(string imageName)
+    {
+        var path = Path.Combine(ImagesPath, $"{imageName}.png");
+        if (File.Exists(path))
+        {
+            var bytes = File.ReadAllBytes(path);
+            return new MemoryStream(bytes);
+        }
+        return null;
     }
 }

@@ -30,5 +30,14 @@ namespace Avtotest.Bot.Console.Services
                 case "Examination": _examinationsService.StartExam(user); break;
             }
         }
+
+        public void TextFilterExam(User user, string message)
+        {
+            switch (message)
+            {
+                case "Menu": SendMenu(user); break;
+                case "Start": _examinationsService.SendTicketQuestion(user); break;
+            }
+        }
     }
 }

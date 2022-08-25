@@ -1,5 +1,6 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Avtotest.Bot.Console.Services;
@@ -30,6 +31,10 @@ public class TelegramBotService
         bot.SendTextMessageAsync(chatId, message, replyMarkup: reply);
     }
 
+    public void SendMessage(long chatId, string message, Stream image, IReplyMarkup reply = null)
+    {
+        bot.SendPhotoAsync(chatId, new InputOnlineFile(image), message, replyMarkup: reply);
+    }
 
     public ReplyKeyboardMarkup GetKeyboard(List<string> buttonsText)
     {
@@ -37,19 +42,21 @@ public class TelegramBotService
 
         for (int i = 0; i < buttonsText.Count; i++)
         {
-            buttons[i] = new KeyboardButton[] { new (buttonsText[i]) };
+            buttons[i] = new KeyboardButton[] { new(buttonsText[i]) };
         }
 
-        return new ReplyKeyboardMarkup(buttons){ResizeKeyboard = true};
+        return new ReplyKeyboardMarkup(buttons) { ResizeKeyboard = true };
     }
 
-    public InlineKeyboardMarkup GetInlineKeyboard(List<string> buttonsText)
+    public InlineKeyboardMarkup GetInlineKeyboard(List<string> buttonsText, int? correctAnswerIndex = null)
     {
         InlineKeyboardButton[][] buttons = new InlineKeyboardButton[buttonsText.Count][];
 
         for (var i = 0; i < buttonsText.Count; i++)
         {
-            buttons[i] = new InlineKeyboardButton[] { InlineKeyboardButton.WithCallbackData(buttonsText[i], buttonsText[i]),  };
+            buttons[i] = new InlineKeyboardButton[] { InlineKeyboardButton.WithCallbackData(
+                text: buttonsText[i],
+                callbackData: correctAnswerIndex == null ? buttonsText[i] : $"{correctAnswerIndex},{i}"),  };
         }
 
         return new InlineKeyboardMarkup(buttons);
