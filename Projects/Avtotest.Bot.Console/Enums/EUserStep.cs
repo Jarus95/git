@@ -4,5 +4,6 @@ public enum EUserStep
 {
     NewUser,
     Menu,
-    Exam
+    Exam,
+    ExamStarted
 }

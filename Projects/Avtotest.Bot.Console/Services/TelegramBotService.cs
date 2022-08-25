@@ -36,6 +36,11 @@ public class TelegramBotService
         bot.SendPhotoAsync(chatId, new InputOnlineFile(image), message, replyMarkup: reply);
     }
 
+    public void EditMessageButtons(long chatId, int messageId, InlineKeyboardMarkup reply)
+    {
+        bot.EditMessageReplyMarkupAsync(chatId, messageId, replyMarkup: reply);
+    }
+
     public ReplyKeyboardMarkup GetKeyboard(List<string> buttonsText)
     {
         KeyboardButton[][] buttons = new KeyboardButton[buttonsText.Count][];
