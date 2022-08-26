@@ -5,11 +5,21 @@ public class Ticket
     public long ChatId { get; set; }
     public int QuestionsCount { get; set; }
     public int CorrectAnswersCount { get; set; }
+    public Queue<QuestionEntity> Questions { get; set; }
 
-    public Ticket(long chatId)
+    public int CurrentQuestion
+    {
+        get
+        {
+            return QuestionsCount - Questions.Count;
+        }
+    }
+
+    public Ticket(long chatId, Queue<QuestionEntity> questions)
     {
         ChatId = chatId;
-        QuestionsCount = 0;
+        QuestionsCount = questions.Count;
         CorrectAnswersCount = 0;
+        Questions = questions;
     }
 }

@@ -8,7 +8,9 @@ using User = Avtotest.Bot.Console.Models.User;
 var botService = new TelegramBotService();
 var examService = new ExaminationsService(botService);
 var userService = new UsersService(botService);
-var menuService = new MenuService(botService, examService);
+var ticketService = new TicketService(botService);
+var menuService = new MenuService(botService, examService, ticketService);
+
 botService.GetUpdate((_, update, _) => Task.Run(() => GetUpdate(update)));
 Console.ReadKey();
 
@@ -16,8 +18,10 @@ void GetUpdate(Update update)
 {
     var (from, messageId, message, reply, isSuccess) = GetValues(update);
     if (!isSuccess) return;
-
+    
     var user = userService.AddUser(from);
+    if(message == user.OldMessage)return;
+    user.OldMessage = message;
     StepFilter(user, message, messageId, reply);
 }
 
@@ -29,6 +33,7 @@ void StepFilter(User user, string message, int messageId, InlineKeyboardMarkup r
         case EUserStep.Menu: menuService.TextFilter(user, message); break;
         case EUserStep.Exam: menuService.TextFilterExam(user, message); break;
         case EUserStep.ExamStarted: examService.CheckAnswer(user, message, messageId, reply); break;
+        case EUserStep.TicketList: ticketService.FilterText(user, message, messageId); break;
     }
 }
 

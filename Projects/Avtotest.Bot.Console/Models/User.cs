@@ -7,6 +7,7 @@ public class User
     public long ChatId { get; set; }
     public string Name { get; set; }
     public EUserStep Step { get; set; }
+    public string OldMessage { get; set; }
 
     public User(long chatId, string name)
     {

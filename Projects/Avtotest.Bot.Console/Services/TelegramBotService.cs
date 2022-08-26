@@ -7,7 +7,7 @@ namespace Avtotest.Bot.Console.Services;
 
 public class TelegramBotService
 {
-    private const string BotToken = "5481889693:AAH1-Wu_cRciv6_vLju-ULX7LvCaX33tIPA";
+    private const string BotToken = "5481889693:AAHWere6v27dnKpEBYXO80ffHTsUeADx3sc";
     private TelegramBotClient bot;
 
     public TelegramBotService()
@@ -53,7 +53,7 @@ public class TelegramBotService
         return new ReplyKeyboardMarkup(buttons) { ResizeKeyboard = true };
     }
 
-    public InlineKeyboardMarkup GetInlineKeyboard(List<string> buttonsText, int? correctAnswerIndex = null)
+    public InlineKeyboardMarkup GetInlineKeyboard(List<string> buttonsText, int? correctAnswerIndex = null, int? questionIndex = null)
     {
         InlineKeyboardButton[][] buttons = new InlineKeyboardButton[buttonsText.Count][];
 
@@ -61,7 +61,7 @@ public class TelegramBotService
         {
             buttons[i] = new InlineKeyboardButton[] { InlineKeyboardButton.WithCallbackData(
                 text: buttonsText[i],
-                callbackData: correctAnswerIndex == null ? buttonsText[i] : $"{correctAnswerIndex},{i}"),  };
+                callbackData: correctAnswerIndex == null ? buttonsText[i] : $"{correctAnswerIndex},{i},{questionIndex}"),  };
         }
 
         return new InlineKeyboardMarkup(buttons);

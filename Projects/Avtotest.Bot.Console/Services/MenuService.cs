@@ -8,11 +8,13 @@ namespace Avtotest.Bot.Console.Services
     {
         private readonly TelegramBotService _telegramBotService;
         private readonly ExaminationsService _examinationsService;
+        private readonly TicketService _ticketService;
 
-        public MenuService(TelegramBotService telegramBotService, ExaminationsService examinationsService)
+        public MenuService(TelegramBotService telegramBotService, ExaminationsService examinationsService, TicketService ticketService)
         {
             _telegramBotService = telegramBotService;
             _examinationsService = examinationsService;
+            _ticketService = ticketService;
         }
 
         public void SendMenu(User user)
@@ -26,7 +28,7 @@ namespace Avtotest.Bot.Console.Services
         {
             switch (message)
             {
-                case "Ticket": _telegramBotService.SendMessage(user.ChatId, "Tickets"); break;
+                case "Ticket": _ticketService.DisplayTickets(user); break;
                 case "Examination": _examinationsService.StartExam(user); break;
             }
         }

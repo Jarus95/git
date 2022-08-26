@@ -9,35 +9,33 @@ public class Database
     private const string QuestionsJsonPath = "JsonData/uzlotin.json";
     private const string ImagesPath = "Images";
 
-    private static UsersDatabase _usersDatabase;
-    public static UsersDatabase UsersDb
+    private static Database _database;
+    public static Database Db
     {
         get
         {
-            if (_usersDatabase == null)
+            if (_database == null)
             {
-                _usersDatabase = new UsersDatabase(ReadUsersJson());
+                _database = new Database();
             }
 
-            return _usersDatabase;
+            return _database;
         }
     }
 
-    private static QuestionsDatabase _questionsDatabase;
-    public static QuestionsDatabase QuestionsDb
+    public Database()
     {
-        get
-        {
-            if (_questionsDatabase == null)
-            {
-                _questionsDatabase = new QuestionsDatabase(ReadQuestionsJson());
-            }
-
-            return _questionsDatabase;
-        }
+        UsersDb = new UsersDatabase(ReadUsersJson());
+        QuestionsDb = new QuestionsDatabase(ReadQuestionsJson());
+        TicketDb = new TicketDatabase();
     }
 
-    private static List<User> ReadUsersJson()
+    public UsersDatabase UsersDb;
+    public QuestionsDatabase QuestionsDb;
+    public TicketDatabase TicketDb;
+
+
+    private List<User> ReadUsersJson()
     {
         if (!File.Exists(UsersJsonPath)) return new List<User>();
         var json = File.ReadAllText(UsersJsonPath);
@@ -53,7 +51,7 @@ public class Database
         }
     }
 
-    private static List<QuestionEntity> ReadQuestionsJson()
+    private List<QuestionEntity> ReadQuestionsJson()
     {
         if (!File.Exists(QuestionsJsonPath)) return new List<QuestionEntity>();
         var json = File.ReadAllText(QuestionsJsonPath);

@@ -1,6 +1,7 @@
 ﻿using Avtotest.Bot.Console.Databases;
 using Avtotest.Bot.Console.Enums;
 using Avtotest.Bot.Console.Models;
+using Avtotest.Bot.Console.Options;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Avtotest.Bot.Console.Services;
@@ -8,8 +9,7 @@ namespace Avtotest.Bot.Console.Services;
 public class ExaminationsService
 {
     private readonly TelegramBotService _telegramBotService;
-    private readonly int ticketQuestionsCount = 10;
-    private Dictionary<long, Queue<QuestionEntity>> _exams = new();
+    private Dictionary<long, Ticket> _exams = new();
 
     public ExaminationsService(TelegramBotService telegramBotService)
     {
@@ -22,19 +22,16 @@ public class ExaminationsService
         DisplayTicket(user, ticket);
     }
 
-    private Queue<QuestionEntity> CreateTicket(long chatId)
+    private Ticket CreateTicket(long chatId)
     {
-        Random rand = new Random();
-        int randomNumber = rand.Next(0, Database.QuestionsDb.Questions.Count / ticketQuestionsCount);
-        var questions = Database.QuestionsDb.CreateTicket(randomNumber * ticketQuestionsCount, ticketQuestionsCount);
-        var questionsQueue = new Queue<QuestionEntity>(questions);
-        _exams.Add(chatId, questionsQueue);
-        return questionsQueue;
+        var ticket = new Ticket(chatId, CreateExamTicket());
+        _exams.Add(chatId, ticket);
+        return ticket;
     }
 
-    private void DisplayTicket(User user, Queue<QuestionEntity> ticket)
+    private void DisplayTicket(User user, Ticket ticket)
     {
-        var message = $"Exam started\n Questions count: {ticket.Count}";
+        var message = $"Exam started\n Questions count: {ticket.QuestionsCount}";
         var buttons = _telegramBotService.GetInlineKeyboard(new List<string>() { "Start" });
         _telegramBotService.SendMessage(user.ChatId, message, buttons);
         user.SetStep(EUserStep.Exam);
@@ -42,7 +39,8 @@ public class ExaminationsService
 
     public void SendTicketQuestion(User user)
     {
-        Queue<QuestionEntity> ticketQueue = _exams[user.ChatId];
+        var ticket = _exams[user.ChatId];
+        Queue<QuestionEntity> ticketQueue = ticket.Questions;
         if(ticketQueue == null || ticketQueue.Count == 0)
         {
             TicketFinished(user);
@@ -59,26 +57,45 @@ public class ExaminationsService
         var correctChoice = question.Choices.First(choice => choice.Answer);
         var correctAnswerIndex = question.Choices.IndexOf(correctChoice);
 
+        var ticket = _exams[user.ChatId];
+        var questionIndex = $"[{ticket.CurrentQuestion}/{ticket.QuestionsCount}]"; 
+
         if (question.Media.Exist)
         {
             _telegramBotService.SendMessage(
                 chatId: user.ChatId,
-                message: question.Question,
+                message: $"{questionIndex} {question.Question}",
                 image: Database.GetQuestionMedia(question.Media.Name),
-                reply: _telegramBotService.GetInlineKeyboard(choices, correctAnswerIndex));
+                reply: _telegramBotService.GetInlineKeyboard(choices, correctAnswerIndex, ticket.CurrentQuestion));
             return;
         }
 
         _telegramBotService.SendMessage(
             chatId: user.ChatId,
-            message: question.Question,
-            reply: _telegramBotService.GetInlineKeyboard(choices, correctAnswerIndex));
+            message: $"{questionIndex} {question.Question}",
+            reply: _telegramBotService.GetInlineKeyboard(choices, correctAnswerIndex, ticket.CurrentQuestion));
     }
 
     public void CheckAnswer(User user, string message, int messageId, InlineKeyboardMarkup reply)
     {
-        var answer = message.Split(',').Select(int.Parse).ToArray();
-        var answerResult = answer[0] == answer[1] ? " ✅" : " ❌";
+        int[] answer;
+        try
+        {
+            answer = message.Split(',').Select(int.Parse).ToArray();
+        }
+        catch
+        {
+            return;
+        }
+        var answerResult = " ❌"; ;
+
+        if (answer[0] == answer[1])
+        {
+            var ticket = _exams[user.ChatId];
+            ticket.CorrectAnswersCount++;
+            answerResult = " ✅";
+        }
+
         var _reply = reply.InlineKeyboard.ToArray();
         _reply[ answer[1] ].ToArray()[0].Text += answerResult;
         _telegramBotService.EditMessageButtons(user.ChatId, messageId, new InlineKeyboardMarkup(_reply));
@@ -88,8 +105,17 @@ public class ExaminationsService
 
     public void TicketFinished(User user)
     {
-        user.SetStep(EUserStep.Menu);
-        _telegramBotService.SendMessage(user.ChatId, "Exam finished.");
+        var ticket = _exams[user.ChatId];
+        _telegramBotService.SendMessage(user.ChatId, $"Exam finished.\n Result: {ticket.CorrectAnswersCount}/{ticket.QuestionsCount}");
         _exams.Remove(user.ChatId);
+
+        user.SetStep(EUserStep.Menu);
+    }
+
+    public Queue<QuestionEntity> CreateExamTicket()
+    {
+        int randomNumber = new Random().Next(0, Database.Db.QuestionsDb.Questions.Count / TicketsSettings.TicketQuestionsCount);
+        var questions = Database.Db.QuestionsDb.CreateTicket(randomNumber * TicketsSettings.TicketQuestionsCount, TicketsSettings.TicketQuestionsCount);
+        return new Queue<QuestionEntity>(questions);
     }
 }

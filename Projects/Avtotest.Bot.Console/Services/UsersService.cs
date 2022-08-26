@@ -15,6 +15,6 @@ public class UsersService
     public User AddUser(Telegram.Bot.Types.User user)
     {
         var name = string.IsNullOrEmpty(user.Username) ? user.FirstName : user.Username;
-        return Database.UsersDb.AddUser(user.Id, name);
+        return Database.Db.UsersDb.AddUser(user.Id, name);
     }
 }
