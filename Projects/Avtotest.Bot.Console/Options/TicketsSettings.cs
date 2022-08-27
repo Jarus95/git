@@ -2,5 +2,5 @@
 
 public static class TicketsSettings
 {
-    public static int TicketQuestionsCount = 20;
+    public static int TicketQuestionsCount = 10;
 }

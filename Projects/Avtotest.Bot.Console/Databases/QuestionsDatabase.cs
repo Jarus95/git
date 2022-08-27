@@ -11,7 +11,7 @@ public class QuestionsDatabase
         Questions = questions;
     }
 
-    public List<QuestionEntity> CreateTicket(int from = 0, int questionsCount = 5)
+    public List<QuestionEntity> CreateTicket(int from = 0, int questionsCount = 20)
     {
         return Questions.Skip(from).Take(questionsCount).ToList();
     }

@@ -53,6 +53,8 @@ public class TelegramBotService
         return new ReplyKeyboardMarkup(buttons) { ResizeKeyboard = true };
     }
 
+    //todo methods must be merged
+
     public InlineKeyboardMarkup GetInlineKeyboard(List<string> buttonsText, int? correctAnswerIndex = null, int? questionIndex = null)
     {
         InlineKeyboardButton[][] buttons = new InlineKeyboardButton[buttonsText.Count][];
@@ -62,6 +64,34 @@ public class TelegramBotService
             buttons[i] = new InlineKeyboardButton[] { InlineKeyboardButton.WithCallbackData(
                 text: buttonsText[i],
                 callbackData: correctAnswerIndex == null ? buttonsText[i] : $"{correctAnswerIndex},{i},{questionIndex}"),  };
+        }
+
+        return new InlineKeyboardMarkup(buttons);
+    }
+
+    public InlineKeyboardMarkup GetInlineTicketsKeyboard(List<string> buttonsText, int? ticketIndex = null)
+    {
+        var buttons = new InlineKeyboardButton[buttonsText.Count][];
+
+        for (var i = 0; i < buttonsText.Count; i++)
+        {
+            buttons[i] = new[] { InlineKeyboardButton.WithCallbackData(
+                text: buttonsText[i],
+                callbackData: ticketIndex == null ? i.ToString() : ticketIndex.ToString())  };
+        }
+
+        return new InlineKeyboardMarkup(buttons);
+    }
+
+    public InlineKeyboardMarkup GetInlineKeyboard(List<string> buttonsText, int correctAnswerIndex, int questionIndex, int ticketIndex)
+    {
+        InlineKeyboardButton[][] buttons = new InlineKeyboardButton[buttonsText.Count][];
+
+        for (var i = 0; i < buttonsText.Count; i++)
+        {
+            buttons[i] = new InlineKeyboardButton[] { InlineKeyboardButton.WithCallbackData(
+                text: buttonsText[i],
+                callbackData: $"{correctAnswerIndex},{i},{questionIndex},{ticketIndex}")};
         }
 
         return new InlineKeyboardMarkup(buttons);

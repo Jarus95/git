@@ -6,5 +6,7 @@ public enum EUserStep
     Menu,
     Exam,
     ExamStarted,
-    TicketList
+    TicketList,
+    TicketStarting,
+    TicketStarted
 }

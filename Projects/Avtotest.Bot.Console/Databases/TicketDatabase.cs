@@ -6,13 +6,13 @@ namespace Avtotest.Bot.Console.Databases;
 public class TicketDatabase
 {
     public Dictionary<long, List<Ticket>> UserTickets { get; set; }
-    
+
     public TicketDatabase()
     {
         UserTickets = new Dictionary<long, List<Ticket>>();
     }
 
-    public List<Ticket> OpenNewUserTickets(User user)
+    public List<Ticket> GetOrAddUserTickets(User user)
     {
         if (UserTickets.ContainsKey(user.ChatId))
         {
@@ -27,5 +27,15 @@ public class TicketDatabase
     public int GetTicketsCount()
     {
         return Database.Db.QuestionsDb.Questions.Count / TicketsSettings.TicketQuestionsCount;
+    }
+
+    public void AddTicket(long chatId, Ticket ticket)
+    {
+        var tickets = UserTickets[chatId];
+        if (tickets.Any(t => t.Index == ticket.Index))
+        {
+
+        }
+        tickets.Add(ticket);
     }
 }

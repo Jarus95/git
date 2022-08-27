@@ -41,5 +41,15 @@ namespace Avtotest.Bot.Console.Services
                 case "Start": _examinationsService.SendTicketQuestion(user); break;
             }
         }
+
+
+        public void FilterTicketStarting(User user, string message, int messageId)
+        {
+            switch (message)
+            {
+                case "Menu": SendMenu(user); break;
+                default: _ticketService.StartTicket(user, message, messageId); break;
+            }
+        }
     }
 }

@@ -20,8 +20,8 @@ void GetUpdate(Update update)
     if (!isSuccess) return;
     
     var user = userService.AddUser(from);
-    if(message == user.OldMessage)return;
-    user.OldMessage = message;
+    if(messageId == user.OldMessageId)return;
+    user.OldMessageId = messageId;
     StepFilter(user, message, messageId, reply);
 }
 
@@ -34,6 +34,8 @@ void StepFilter(User user, string message, int messageId, InlineKeyboardMarkup r
         case EUserStep.Exam: menuService.TextFilterExam(user, message); break;
         case EUserStep.ExamStarted: examService.CheckAnswer(user, message, messageId, reply); break;
         case EUserStep.TicketList: ticketService.FilterText(user, message, messageId); break;
+        case EUserStep.TicketStarting: menuService.FilterTicketStarting(user, message, messageId); break;
+        case EUserStep.TicketStarted: ticketService.CheckAnswer(user, message, messageId, reply); break;
     }
 }
 
