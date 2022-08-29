@@ -18,7 +18,7 @@ namespace Avtotest.WPF
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             image.Source = new BitmapImage(new Uri(@"/2.png", UriKind.Relative));
-            textbox.Text = "Changed from button";
+            textbox.Text = "Changed 2from button";
         }
 
         private void textbox_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
