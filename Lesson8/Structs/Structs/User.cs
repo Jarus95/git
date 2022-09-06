@@ -1,4 +1,6 @@
-﻿struct User
+﻿namespace Structs.Structs;
+
+struct User
 {
     public string Name;
     public int Answers;

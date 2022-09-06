@@ -1,6 +1,9 @@
 ﻿/*
  * QuizApp with struct
  */
+
+using QuizApp;
+
 User user1 = new User()
 {
     Name = "Ismi",

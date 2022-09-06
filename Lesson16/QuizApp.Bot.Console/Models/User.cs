@@ -1,4 +1,4 @@
-﻿namespace Models;
+﻿namespace QuizApp.Bot.Console.Models;
 
 public class User
 {

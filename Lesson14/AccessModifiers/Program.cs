@@ -1,42 +1,46 @@
 ﻿//Main
+
 Console.WriteLine("Start");
 
-class User
+namespace AccessModifiers
 {
-    public string ChatId;
-    private string Name;
-
-    public User()
+    class User
     {
-        Name = "Userni ismi";
-        var userChatId = GetUserNameWithChatId();
+        public string ChatId;
+        private string Name;
+
+        public User()
+        {
+            Name = "Userni ismi";
+            var userChatId = GetUserNameWithChatId();
+        }
+
+        public string ToText()
+        {
+            //userChatId = "fa";
+            return $"Ismi {Name}";
+        }
+
+        public string GetUserName()
+        {
+            return Name;
+        }
+
+        private string GetUserNameWithChatId()
+        {
+            return Name + ChatId;
+        }
     }
 
-    public string ToText()
+    class Question
     {
-        //userChatId = "fa";
-        return $"Ismi {Name}";
-    }
+        User user;
 
-    public string GetUserName()
-    {
-        return Name;
-    }
-
-    private string GetUserNameWithChatId()
-    {
-        return Name + ChatId;
-    }
-}
-
-class Question
-{
-    User user;
-
-    public Question()
-    {
-        user = new User();
-        user.ChatId = "User ismi";
-        var userName = user.GetUserName();
+        public Question()
+        {
+            user = new User();
+            user.ChatId = "User ismi";
+            var userName = user.GetUserName();
+        }
     }
 }

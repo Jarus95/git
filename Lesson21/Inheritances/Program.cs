@@ -1,4 +1,6 @@
-﻿Dog dog1 = new Dog();
+﻿using Inheritances;
+
+Dog dog1 = new Dog();
 dog1.Name = "Name1";
 
 Cow cow1 = new Cow();
@@ -18,27 +20,30 @@ animals.Add(hayvon);
 animals.Add(dog1);
 animals.Add(cow1);
 
-class Cow : Animal
+namespace Inheritances
 {
-    public int Horn;
-    public int Tail;
-}
-
-class Dog : Animal
-{
-    
-}
-
-class Animal
-{
-    public string Name;
-    public int Age;
-
-    public void Sound()
+    class Cow : Animal
     {
+        public int Horn;
+        public int Tail;
     }
 
-    public void Eat()
+    class Dog : Animal
     {
+    
+    }
+
+    class Animal
+    {
+        public string Name;
+        public int Age;
+
+        public void Sound()
+        {
+        }
+
+        public void Eat()
+        {
+        }
     }
 }

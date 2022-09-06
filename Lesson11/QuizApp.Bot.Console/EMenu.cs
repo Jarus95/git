@@ -1,4 +1,6 @@
-﻿public enum EMenu
+﻿namespace QuizApp.Bot.Console;
+
+public enum EMenu
 {
     StartQuiz = 1,
     AddQuestion = 2,

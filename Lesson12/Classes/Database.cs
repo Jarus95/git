@@ -1,4 +1,6 @@
-﻿class Database
+﻿namespace Classes;
+
+class Database
 {
     public QuestionsDatabase questionDb;
     public UsersDatabase usersDb;

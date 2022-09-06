@@ -1,5 +1,4 @@
-﻿using Models;
-using QuizApp.Bot.Console.Models;
+﻿using QuizApp.Bot.Console.Models;
 
 namespace QuizApp.Bot.Console.Services;
 

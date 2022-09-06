@@ -1,4 +1,6 @@
-﻿class QuestionsDatabase
+﻿namespace Classes;
+
+class QuestionsDatabase
 {
     public List<Question> Questions = new List<Question>();
 
@@ -13,10 +15,10 @@
         if (questionMassiv.Length <= 4) return null;
 
         Question question = new Question(
-                question: questionMassiv[0],
-                index: int.Parse(questionMassiv[1]),
-                choices: questionMassiv.Skip(2).ToList()
-            );
+            question: questionMassiv[0],
+            index: int.Parse(questionMassiv[1]),
+            choices: questionMassiv.Skip(2).ToList()
+        );
         Questions.Add(question);
         return question;
     }

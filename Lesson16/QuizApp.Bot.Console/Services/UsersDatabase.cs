@@ -1,6 +1,5 @@
-﻿using Telegram.Bot.Types;
-using User = Models.User; 
-namespace Services;
+﻿using User = QuizApp.Bot.Console.Models.User; 
+namespace QuizApp.Bot.Console.Services;
 
 public class UsersDatabase
 {

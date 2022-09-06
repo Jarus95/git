@@ -1,4 +1,6 @@
-﻿class Question
+﻿namespace Classes;
+
+class Question
 {
     public string QuestionText;
     public int CorrectAnswerIndex;

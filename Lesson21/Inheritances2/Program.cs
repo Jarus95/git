@@ -1,6 +1,8 @@
 ﻿//Animal anim1 = new Animal(); //can not create obj from abstract class
 //anim1.Sound();
 
+using Inheritances2;
+
 Cow cow1 = new Cow();
 //cow1.Sound();
 
@@ -30,49 +32,52 @@ foreach (var animal in animals)
     animal.Sound();
 }
 
-class CowType : Cow
+namespace Inheritances2
 {
-    public override void Sound()
+    class CowType : Cow
     {
-        Console.WriteLine("Cowtype sound");
+        public override void Sound()
+        {
+            Console.WriteLine("Cowtype sound");
+        }
     }
-}
 
-class Cow : Animal
-{
-    public int Horn;
-    public int Tail;
-
-    public override  void Sound()
+    class Cow : Animal
     {
-        Console.WriteLine("Cow sound");
+        public int Horn;
+        public int Tail;
+
+        public override  void Sound()
+        {
+            Console.WriteLine("Cow sound");
+        }
     }
-}
 
 // sealed - can not use as base class
-sealed class Dog : Animal
-{
-    //to change this from base class
-    public override void Sound()
+    sealed class Dog : Animal
     {
-        Console.WriteLine("Bark...");
+        //to change this from base class
+        public override void Sound()
+        {
+            Console.WriteLine("Bark...");
+        }
     }
-}
 
 // abstract - can not creat obj from abstract class
-abstract class Animal
-{
-    public string Name;
-    public int Age;
-
-    //allows to change this in drived class
-    public virtual void Sound()
+    abstract class Animal
     {
-        Console.WriteLine("Animal sound...");
-    }
+        public string Name;
+        public int Age;
 
-    public void Eat()
-    {
-        Console.WriteLine("I'm eating...");
+        //allows to change this in drived class
+        public virtual void Sound()
+        {
+            Console.WriteLine("Animal sound...");
+        }
+
+        public void Eat()
+        {
+            Console.WriteLine("I'm eating...");
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using System.Runtime.CompilerServices;
+using Structs.Structs;
 
 Book myBook = new Book();
 myBook.Name = "Csharp";

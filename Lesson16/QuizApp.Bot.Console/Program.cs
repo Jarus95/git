@@ -1,6 +1,5 @@
-﻿using User = Models.User;
+﻿using User = QuizApp.Bot.Console.Models.User;
 using QuizApp.Bot.Console.Services;
-using Services;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;

@@ -1,4 +1,6 @@
-﻿public enum EMenu
+﻿namespace QuizApp;
+
+public enum EMenu
 {
     StartQuiz = 1,
     AddQuestion = 2,

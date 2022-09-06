@@ -1,53 +1,108 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Avtotest.WPF.Databases;
+using Avtotest.WPF.Models;
 
 namespace Avtotest.WPF
 {
     public partial class MainWindow : Window
     {
-        private List<Question> Questions = new List<Question>();
+        private int currentQuestionIndex = 0;
+        private Button correctAnswer;
+
         public MainWindow()
         {
             InitializeComponent();
+            ShowQuestion();
+
+
+            question.Visibility = Visibility.Hidden;
+            question.IsEnabled = false;
+        }
+
+        private void SetImage(string imageName)
+        {
+            questionImage.Source = new BitmapImage(new Uri(Path.Combine(Environment.CurrentDirectory, "Images", $"{imageName}.png")));
+        }
+
+        private void ShowQuestion()
+        {
+            var question = Database.Db.QuestionsDb.Questions[currentQuestionIndex];
+            nextBtn.Visibility = Visibility.Hidden;
+
+            SetImage(question.Media.Exist ? question.Media.Name : "car");
+            questionText.Text = $"{currentQuestionIndex+1}. {question.Question}";
+            var corectAnswetIndex = question.Choices.IndexOf(question.Choices.First(ch => ch.Answer));
+            AddButtons(question.Choices.Select(q => q.Text).ToList(), corectAnswetIndex);
+        }
+
+        private void AddButtons(List<string> choices, int correctAnswerIndex)
+        {
+            panel.Children.Clear();
+            for (int i = 0; i < choices.Count; i++)
+            {
+                var button = new Button();
+                button.Margin = new Thickness(10, 0, 10, 10);
+                button.FontSize = 16;
+                button.Height = 30;
+                button.Content = choices[i];
+                button.Click += Button_Click;
+                panel.Children.Add(button);
+                
+                if (i == correctAnswerIndex)
+                {
+                    correctAnswer = button;
+                }
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            if (correctAnswer == button) 
+                button.Background = new SolidColorBrush(Colors.Green);
+            else
+                button.Background = new SolidColorBrush(Colors.Red);
+            nextBtn.Visibility = Visibility.Visible;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            image.Source = new BitmapImage(new Uri(@"/2.png", UriKind.Relative));
-            textbox.Text = "Changed 2from button";
+            currentQuestionIndex++;
+            ShowQuestion();
         }
 
-        private void textbox_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            textbox.FontSize = 20;
-            textbox.Text = "Mouse on me";
-            panel.Visibility = Visibility.Hidden;
-        }
-
-        private void textbox_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            textbox.Text = "Mouse leave";
-            AddButtons();
-            panel.Visibility = Visibility.Visible;
-
-        }
-
-        public void AddButtons()
-        {
-            for (int i = 0; i < 4; i++)
+            if (e.Key == Key.Right)
             {
-                var button = new Button();
-                button.Content = "Variant" + i;
-                button.Width = 80;
-                button.Height = 40;
-                button.Margin = new Thickness(0, 0, 0, 20);
-                button.Click += ButtonBase_OnClick;
-                panel.Children.Add(button);
+                currentQuestionIndex++;
+                ShowQuestion();
             }
+            if (e.Key == Key.Left)
+            {
+                currentQuestionIndex--;
+                ShowQuestion();
+            }
+        }
+
+        private void ButtonStart_OnClick(object sender, RoutedEventArgs e)
+        {
+            menu.IsEnabled = false;
+            menu.Visibility = Visibility.Hidden;
+            question.Visibility = Visibility.Visible;
+            question.IsEnabled = true;
         }
     }
 }

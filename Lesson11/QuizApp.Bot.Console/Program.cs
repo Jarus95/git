@@ -1,5 +1,7 @@
-﻿using Telegram.Bot;
+﻿using QuizApp.Bot.Console;
+using Telegram.Bot;
 using Telegram.Bot.Types;
+using User = QuizApp.Bot.Console.User;
 
 List<Question> questions = new List<Question>();
 AddDefaultQuestion();

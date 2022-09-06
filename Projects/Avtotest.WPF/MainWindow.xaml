@@ -1,0 +1,24 @@
+﻿<Window x:Class="Avtotest.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Avtotest.WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="500" PreviewKeyDown="Window_PreviewKeyDown">
+    <Grid>
+        <StackPanel Name="menu">
+            <Button Height="40" Margin="20" Content="Start" Click="ButtonStart_OnClick"></Button>
+        </StackPanel>
+        <StackPanel Name="question">
+            <StackPanel Orientation="Vertical">
+                <Button Name="nextBtn" Height="30" Click="ButtonBase_OnClick" Content="Next"></Button>
+            </StackPanel>
+            <Image VerticalAlignment="Top" Name="questionImage" Height="300" Margin="10,10,10,10" Width="380"/>
+            <TextBox Name="questionText" HorizontalAlignment="Left" Margin="10,0,10,10" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="16"/>
+            <StackPanel  Name="panel">
+                <Button Content="Variant 1" Margin="10,0,10,10" FontSize="16" Height="40" FontWeight="SemiBold" Click="Button_Click" Background="#FFCC9B9B"></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

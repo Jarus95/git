@@ -1,4 +1,6 @@
-﻿struct User
+﻿namespace QuizApp.Bot.Console;
+
+struct User
 {
     public long Id;
     public string Name;

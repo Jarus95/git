@@ -1,6 +1,8 @@
-﻿using Telegram.Bot.Types;
+﻿using Classes;
+using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using User = Classes.User;
 
 var db = new Database();
 var bot = new TelegramBot();

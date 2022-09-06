@@ -1,4 +1,6 @@
-﻿Dictionary<string, string> uzbek;
+﻿using Dictionaries;
+
+Dictionary<string, string> uzbek;
 uzbek = new Dictionary<string, string>();
 uzbek.Add("menu", "Mundarija");
 uzbek.Add("correct", "Togri");
@@ -55,10 +57,13 @@ foreach (var m in ms)
     Console.WriteLine(m.Key);
 }
 
-enum Langs
+namespace Dictionaries
 {
-    Uzbek,
-    Russain,
-    English
+    enum Langs
+    {
+        Uzbek,
+        Russain,
+        English
+    }
 }
 
