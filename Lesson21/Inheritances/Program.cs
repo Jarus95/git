@@ -7,29 +7,58 @@ Cow cow1 = new Cow();
 cow1.Name = "Cow1";
 cow1.Tail = 2;
 
-Animal hayvon = new Dog();
-Animal hayvon1 = new Cow();
+//Dog va Cow ning zamiridagi class animal bulgani uchun biz uni quidagi holatda yozishimiz mumkin.
+//YA'ni Animal class Dog va Cow classlari uchun Base classi bulganligi sababli ham shu kurinishda yozish mumkin
+//IEnumerable<string> animal = new List<string>();---- ning  yozilishining sababi ham shundan iborat
 
-//Dog dog2 = new Animal();
+//Derived classdan obyekt olib Base class ga beraolmaymiz.Ammmo aksi mumkin.Ya'ni
+//Dog dog = new Animal(); kurinishda yozaolmaymiz
 
-Animal animCow = cow1;
-Console.WriteLine(animCow.Name);
+Animal animal = new Dog();
+Animal animal2 = new Cow();
 
-List<Animal> animals = new List<Animal>();
-animals.Add(hayvon);
-animals.Add(dog1);
-animals.Add(cow1);
+Animal animal1 = cow1;
+System.Console.WriteLine(animal1.Name);
 
+<<<<<<< HEAD
 namespace Inheritances
 {
     class Cow : Animal
     {
         public int Horn;
         public int Tail;
+=======
+
+// Bu class bir nechta elementlari Animal bilan bir xil bugani uchun 
+// bu elementlarni biz Animaldan olishimiz mumkin.
+//bunda Animal classi asosiy class bulgani uchun bu class -- Base class deb yuritiladi
+// Cow va Dog classi Base class(Animal classdan) meros olgani ya'ni ma'lum bir elementlari undan hosil bulgani uchun
+//  bu class Derived Class deb yuritiladi
+class Cow : Animal
+
+{
+    public int Horn;
+    public int Tail;
+}
+
+
+class Dog : Animal
+{
+
+}
+class Animal
+{
+    public string Name;
+    public int Age;
+    public void Sound()
+    {
+        System.Console.WriteLine("Animal Sound.....");
+>>>>>>> 895c5eb3f6813203dc489fd63f7575c4aee6870e
     }
 
     class Dog : Animal
     {
+<<<<<<< HEAD
     
     }
 
@@ -45,5 +74,8 @@ namespace Inheritances
         public void Eat()
         {
         }
+=======
+        System.Console.WriteLine("I am eating.....");
+>>>>>>> 895c5eb3f6813203dc489fd63f7575c4aee6870e
     }
 }
