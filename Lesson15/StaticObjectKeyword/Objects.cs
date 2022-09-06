@@ -1,6 +1,4 @@
-﻿using Models;
-
-namespace StaticObjectKeyword
+﻿namespace StaticObjectKeyword
 {
     public static class Objects
     {

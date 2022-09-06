@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿namespace Structs;
 
 struct Question
 {

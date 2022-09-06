@@ -1,4 +1,6 @@
-﻿struct User
+﻿namespace QuizApp;
+
+struct User
 {
     public string Name;
     public int CorrectAnswersCount;
@@ -39,9 +41,9 @@
     public User Copy()
     {
         /*var copy = new User();
-        copy.Name = Name;
-        copy.CorrectAnswersCount = CorrectAnswersCount;
-        copy.QuestionsCount = QuestionsCount;*/
+    copy.Name = Name;
+    copy.CorrectAnswersCount = CorrectAnswersCount;
+    copy.QuestionsCount = QuestionsCount;*/
 
         return this;
     }

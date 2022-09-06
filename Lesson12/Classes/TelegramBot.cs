@@ -2,6 +2,8 @@
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
+namespace Classes;
+
 class TelegramBot
 {
     public TelegramBotClient Bot;

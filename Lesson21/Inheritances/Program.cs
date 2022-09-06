@@ -1,4 +1,6 @@
-﻿Dog dog1 = new Dog();
+﻿using Inheritances;
+
+Dog dog1 = new Dog();
 dog1.Name = "Name1";
 
 Cow cow1 = new Cow();
@@ -18,6 +20,14 @@ Animal animal2 = new Cow();
 Animal animal1 = cow1;
 System.Console.WriteLine(animal1.Name);
 
+<<<<<<< HEAD
+namespace Inheritances
+{
+    class Cow : Animal
+    {
+        public int Horn;
+        public int Tail;
+=======
 
 // Bu class bir nechta elementlari Animal bilan bir xil bugani uchun 
 // bu elementlarni biz Animaldan olishimiz mumkin.
@@ -43,10 +53,29 @@ class Animal
     public void Sound()
     {
         System.Console.WriteLine("Animal Sound.....");
+>>>>>>> 895c5eb3f6813203dc489fd63f7575c4aee6870e
     }
 
-    public void Eat()
+    class Dog : Animal
     {
+<<<<<<< HEAD
+    
+    }
+
+    class Animal
+    {
+        public string Name;
+        public int Age;
+
+        public void Sound()
+        {
+        }
+
+        public void Eat()
+        {
+        }
+=======
         System.Console.WriteLine("I am eating.....");
+>>>>>>> 895c5eb3f6813203dc489fd63f7575c4aee6870e
     }
 }

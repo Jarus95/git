@@ -1,4 +1,6 @@
-﻿int[] sonlar = new int[] { 1, 2, 3, 4, 5 };
+﻿using Loops;
+
+int[] sonlar = new int[] { 1, 2, 3, 4, 5 };
 
 for (int i = 0; i < sonlar.Length; i++)
 {
@@ -51,9 +53,9 @@ var c = 7;
 switch (c)
 {
     case 5:
-        {
-            Console.WriteLine("Son 5ga teng");
-        }
+    {
+        Console.WriteLine("Son 5ga teng");
+    }
         break;
     case 6: Console.WriteLine(c); break;
     default: Console.WriteLine($"{c} hech bir shartga togri kelmadi"); break;
@@ -127,12 +129,15 @@ var age = model!.Entity!.Age;
 
 Console.WriteLine(age);
 
-class Model
+namespace Loops
 {
-    public Entity? Entity { get; set; }
-}
+    class Model
+    {
+        public Entity? Entity { get; set; }
+    }
 
-class Entity
-{
-    public int Age { get; set; } = 12;
+    class Entity
+    {
+        public int Age { get; set; } = 12;
+    }
 }

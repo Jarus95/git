@@ -1,4 +1,6 @@
-﻿Console.WriteLine("1, Qoshiq");
+﻿using Enums;
+
+Console.WriteLine("1, Qoshiq");
 Console.WriteLine("2, Qoshiq");
 Console.WriteLine("3, Qoshiq");
 Console.WriteLine("4, Qoshiq");
@@ -15,12 +17,15 @@ switch (a)
 
 Console.WriteLine(a);
 
-enum Menu
+namespace Enums
 {
-    StartTest = 1,
-    AddQuestion, //2
-    Dashboard = 10,  //10
-    Statistics = 12
+    enum Menu
+    {
+        StartTest = 1,
+        AddQuestion, //2
+        Dashboard = 10,  //10
+        Statistics = 12
+    }
 }
 
 

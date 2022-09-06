@@ -1,11 +1,12 @@
-﻿using Databases;
-using Models.Views;
+﻿using Namespaces.Databases;
+using Namespaces.Models.Entities;
+using Message = Namespaces.Models.Views.Message;
 
-Models.Entities.Question question;
+Question question;
 
 QuestionsDatabase db;
 
-Models.Views.Message msg = new Models.Views.Message();
+Message msg = new Message();
 
 Message ms = new Message();
 

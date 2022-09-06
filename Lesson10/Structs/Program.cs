@@ -1,4 +1,6 @@
-﻿User user = new User();
+﻿using Structs;
+
+User user = new User();
 user.name = "ism";
 user.son = 2;
 

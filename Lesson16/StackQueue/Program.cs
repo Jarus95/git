@@ -1,4 +1,6 @@
-﻿int[] arr = new int[] { 1, 2, 3, 4, 5 };
+﻿using StackQueue;
+
+int[] arr = new int[] { 1, 2, 3, 4, 5 };
 
 Stack<int> navbat = new Stack<int>(arr);
 
@@ -38,11 +40,14 @@ for (int i = 0; i < questions.Count; i++)
 
 Console.WriteLine(questions.Count);
 
-class Question
+namespace StackQueue
 {
-    public string QuestionText;
-    public Question(string questionText)
+    class Question
     {
-        QuestionText = questionText;
+        public string QuestionText;
+        public Question(string questionText)
+        {
+            QuestionText = questionText;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Models.Views
+﻿namespace Namespaces.Models.Views
 {
     class Message
     {

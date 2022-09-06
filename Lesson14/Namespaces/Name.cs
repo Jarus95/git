@@ -1,4 +1,6 @@
-﻿namespace Models
+﻿using Namespaces.Models.Views;
+
+namespace Namespaces
 {
     namespace Entities
     {

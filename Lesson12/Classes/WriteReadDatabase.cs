@@ -1,4 +1,4 @@
-﻿using Telegram.Bot.Requests;
+﻿namespace Classes;
 
 class WriteReadDatabase
 {

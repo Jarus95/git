@@ -1,5 +1,4 @@
-﻿using Models;
-using StaticObjectKeyword;
+﻿using StaticObjectKeyword;
 
 Objects.Main();
 
@@ -24,7 +23,7 @@ User.Group = "Ism";
 Console.WriteLine(User.Group);
 
 
-namespace Models
+namespace StaticObjectKeyword
 {
     public class User
     {

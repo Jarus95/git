@@ -1,4 +1,6 @@
-﻿struct Question
+﻿namespace QuizApp;
+
+struct Question
 {
     public string QuestionText;
     public int CorrectAnswerIndex;

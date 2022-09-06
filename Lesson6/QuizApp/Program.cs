@@ -1,4 +1,4 @@
-﻿using System.Net.Mime;
+﻿using QuizApp;
 
 List<string[]> questions = new List<string[]>();
 var statistics = new List<Tuple<string, int>>() 
@@ -241,13 +241,16 @@ Dictionary<string, string> GetLanguage()
     return uzbek;
 }
 
-enum Menu
+namespace QuizApp
 {
-    StartQuiz = 1,
-    AddQuestion,
-    Dashboard,
-    Statistics,
-    Close,
-    Show,
-    Clear
+    enum Menu
+    {
+        StartQuiz = 1,
+        AddQuestion,
+        Dashboard,
+        Statistics,
+        Close,
+        Show,
+        Clear
+    }
 }

@@ -1,4 +1,6 @@
-﻿class User
+﻿namespace Classes;
+
+class User
 {
     //field, method, property, ...
     public string Name;

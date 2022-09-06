@@ -1,4 +1,6 @@
-﻿struct Question
+﻿namespace QuizApp.Bot.Console;
+
+struct Question
 {
     public string QuestionText;
     public int CorrectAnswerIndex;

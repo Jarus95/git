@@ -1,6 +1,4 @@
-﻿using Namespaces.Models.Entities;
-
-namespace Databases
+﻿namespace Namespaces.Databases
 {
     class QuestionsDatabase
     {

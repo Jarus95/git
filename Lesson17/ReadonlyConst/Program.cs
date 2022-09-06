@@ -1,4 +1,6 @@
-﻿string a = "9";
+﻿using ReadonlyConst;
+
+string a = "9";
 object aObj = a;
 
 try
@@ -28,39 +30,42 @@ Console.WriteLine(user.Name);
 Console.WriteLine();
 
 
-class User
+namespace ReadonlyConst
 {
-    public string Name;
-    public readonly int Age; // = 18;
-    public const int AgeLimit = 16;
-    public static int Id = 0;
-
-    public User()
+    class User
     {
-        //AgeLimit = 0;
-        Id = 1;
-    }
+        public string Name;
+        public readonly int Age; // = 18;
+        public const int AgeLimit = 16;
+        public static int Id = 0;
 
-    public User(int age)
-    {
-        Age = age;
-    }
+        public User()
+        {
+            //AgeLimit = 0;
+            Id = 1;
+        }
 
-    public User(string name, int age)
-    {
-        Name = name;
-        Age = age;
-    }
+        public User(int age)
+        {
+            Age = age;
+        }
 
-    public void SetName(string name)
-    {
-        Name = name;
-    }
+        public User(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
 
-    public void SetAge(int age)
-    {
-        //Age = age; error
-        //AgeLimit = 12; error
-        Id = 3;
+        public void SetName(string name)
+        {
+            Name = name;
+        }
+
+        public void SetAge(int age)
+        {
+            //Age = age; error
+            //AgeLimit = 12; error
+            Id = 3;
+        }
     }
 }

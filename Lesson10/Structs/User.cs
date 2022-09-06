@@ -1,4 +1,6 @@
-﻿struct User
+﻿namespace Structs;
+
+struct User
 {
     public string name { get; set; }
     public int son;
