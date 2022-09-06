@@ -5,48 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Avtotest.WPF"
         mc:Ignorable="d"
-<<<<<<< HEAD
-        Title="MainWindow" Height="700" Width="500" PreviewKeyDown="Window_PreviewKeyDown">
+        Title="MainWindow" Height="700" Width="500" Background="Aqua">
     <Grid>
-        <StackPanel Name="menu">
-            <Button Height="40" Margin="20" Content="Start" Click="ButtonStart_OnClick"></Button>
-        </StackPanel>
-        <StackPanel Name="question">
-            <StackPanel Orientation="Vertical">
-                <Button Name="nextBtn" Height="30" Click="ButtonBase_OnClick" Content="Next"></Button>
-            </StackPanel>
-            <Image VerticalAlignment="Top" Name="questionImage" Height="300" Margin="10,10,10,10" Width="380"/>
-            <TextBox Name="questionText" HorizontalAlignment="Left" Margin="10,0,10,10" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="16"/>
-            <StackPanel  Name="panel">
-                <Button Content="Variant 1" Margin="10,0,10,10" FontSize="16" Height="40" FontWeight="SemiBold" Click="Button_Click" Background="#FFCC9B9B"></Button>
-            </StackPanel>
-        </StackPanel>
-=======
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox Name="textbox" HorizontalAlignment="Left" Margin="55,44,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="199" Foreground="White" Height="80" FontSize="36" FontStretch="Condensed" TextAlignment="Center" MouseEnter="textbox_MouseEnter" MouseLeave="textbox_MouseLeave">
-            <TextBox.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFCBC12F" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBox.Background>
-        </TextBox>
-        <Image Name="image" HorizontalAlignment="Left"  Height="125" Margin="315,24,0,0" VerticalAlignment="Top" Width="175" RenderTransformOrigin="0.5,0.5" Source="/1.png" Cursor="AppStarting">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        <Ellipse HorizontalAlignment="Left" Height="100" Margin="600,44,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
-        <StackPanel Name="panel" Width="200" Margin="45,144,555,15">
-            <Button Margin="0,0,0,10" Width="100" Height="40" Content="Click" Click="ButtonBase_OnClick" Background="#FFA68E8E"></Button>
-        </StackPanel>
-
->>>>>>> 895c5eb3f6813203dc489fd63f7575c4aee6870e
+        <Frame Margin="20" Source="Pages/MainMenuPage.xaml"></Frame>
     </Grid>
 </Window>
