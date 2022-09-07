@@ -22,7 +22,7 @@ namespace QuizApp.Bot.Console.Services
                 errorHandler: (_, ex, _) =>
                 {
                     System.Console.WriteLine(ex.Message);
-                    return Task.CompletedTask;;
+                    return Task.CompletedTask;
                 });
         }
 

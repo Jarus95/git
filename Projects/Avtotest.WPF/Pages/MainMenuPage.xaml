@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Avtotest.WPF.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainMenuPage" Background="AntiqueWhite">
+      d:DesignHeight="800" d:DesignWidth="500"
+      Title="MainMenuPage">
     <Page.Resources>
         <Style x:Key="MainMenuButtonStyle" TargetType="Button">
             <Style.Setters>
@@ -38,12 +38,22 @@
                 </EventTrigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
     </Page.Resources>
         
-    <Grid >
-        <StackPanel Name="panel" Margin="20">
-            <Button Template="{StaticResource MainMenuButtonTemplate}"/>
-            <Button Template="{StaticResource MainMenuButtonTemplate}"/>
+    <Grid>
+        <StackPanel VerticalAlignment="Bottom" Name="panel" Margin="20">
+            <Image Height="400" Source="/Pages/car.png" ></Image>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,30">
+                <TextBlock Width="230" FontSize="18">365/700</TextBlock>
+                <TextBlock Width="230" FontSize="18" TextAlignment="Right">12/35</TextBlock>
+            </StackPanel>
+            <Button Style="{StaticResource MenuButtonStyle}" Content="Tickets"/>
+            <Button Click="StartExamination" Style="{StaticResource MenuButtonStyle}" Content="Examination"/>
         </StackPanel>
     </Grid>
 </Page>

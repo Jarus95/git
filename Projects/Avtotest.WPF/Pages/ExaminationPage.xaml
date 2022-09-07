@@ -9,15 +9,27 @@
       Title="ExaminationPage"
       Background="AliceBlue">
 
+    <Page.Resources>
+        <Style x:Key="ChoiceButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10,0,10,10"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Content" Value="{Binding Text}"></Setter>
+        </Style>
+        <Style x:Key="QuestionIndexButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="30"/>
+        </Style>
+    </Page.Resources>
+
     <Grid>
-        <StackPanel Name="question">
-            <StackPanel Orientation="Vertical">
-                <Button Name="nextBtn" Height="30" Click="ButtonBase_OnClick" Content="Next"></Button>
-            </StackPanel>
+        <StackPanel Name="QuestionPanel">
+            <StackPanel Name="QuestionsIndexPanel" Margin="5" Orientation="Horizontal"/>
             <Image VerticalAlignment="Top" Name="questionImage" Height="300" Margin="10,10,10,10" Width="380"/>
-            <TextBox Name="questionText" HorizontalAlignment="Left" Margin="10,0,10,10" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="16"/>
-            <StackPanel  Name="panel">
-                <Button Content="Variant 1" Margin="10,0,10,10" FontSize="16" Height="40" FontWeight="SemiBold" Click="Button_Click" Background="#FFCC9B9B"></Button>
+            <TextBox Name="QuestionText" HorizontalAlignment="Left" Margin="10,0,10,10" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="16"/>
+            <StackPanel  Name="ChoicesPanel">
+                <Button Content="Variant 1" Margin="10,0,10,10" FontSize="16" Height="40" FontWeight="SemiBold" Background="#FFCC9B9B"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

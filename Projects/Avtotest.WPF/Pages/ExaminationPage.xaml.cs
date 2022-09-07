@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using Avtotest.WPF.Databases;
+using Avtotest.WPF.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using System.Windows.Media;
-using Avtotest.WPF.Databases;
+using System.Windows.Media.Imaging;
 
 namespace Avtotest.WPF.Pages
 {
@@ -17,11 +17,11 @@ namespace Avtotest.WPF.Pages
         {
             InitializeComponent();
             ShowQuestion();
+            GenerateQuestionIndexButtons();
         }
 
         private int currentQuestionIndex = 0;
-        private Button correctAnswer;
-        
+
         private void SetImage(string imageName)
         {
             questionImage.Source = new BitmapImage(new Uri(Path.Combine(Environment.CurrentDirectory, "Images", $"{imageName}.png")));
@@ -30,64 +30,52 @@ namespace Avtotest.WPF.Pages
         private void ShowQuestion()
         {
             var question = Database.Db.QuestionsDb.Questions[currentQuestionIndex];
-            nextBtn.Visibility = Visibility.Hidden;
-
             SetImage(question.Media.Exist ? question.Media.Name : "car");
-            questionText.Text = $"{currentQuestionIndex + 1}. {question.Question}";
-            var correctAnswetIndex = question.Choices.IndexOf(question.Choices.First(ch => ch.Answer));
-            AddButtons(question.Choices.Select(q => q.Text).ToList(), correctAnswetIndex);
+            QuestionText.Text = $"{currentQuestionIndex + 1}. {question.Question}";
+            AddButtons(question.Choices);
         }
 
-        private void AddButtons(List<string> choices, int correctAnswerIndex)
+        private void AddButtons(List<Choice> choices)
         {
-            panel.Children.Clear();
+            ChoicesPanel.Children.Clear();
             for (int i = 0; i < choices.Count; i++)
             {
                 var button = new Button();
-                button.Margin = new Thickness(10, 0, 10, 10);
-                button.FontSize = 16;
-                button.Height = 30;
-                button.Content = choices[i];
+                button.Style = FindResource("ChoiceButtonStyle") as Style;
+                button.Click += ChoiseSelected;
+                button.DataContext = choices[i];
 
-                button.Click += Button_Click;
-
-                panel.Children.Add(button);
-
-                if (i == correctAnswerIndex)
-                {
-                    correctAnswer = button;
-                }
+                ChoicesPanel.Children.Add(button);
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void GenerateQuestionIndexButtons()
         {
-            var button = (Button)sender;
-            if (correctAnswer == button)
-                button.Background = new SolidColorBrush(Colors.Green);
-            else
-                button.Background = new SolidColorBrush(Colors.Red);
-            nextBtn.Visibility = Visibility.Visible;
+            for (int i = 0; i < 20; i++)
+            {
+                var button = new Button();
+                button.Style = FindResource("QuestionIndexButtonStyle") as Style;
+                button.Content = i + 1;
+                button.Tag = i;
+                button.Click += QuestionIndexSelected;
+                QuestionsIndexPanel.Children.Add(button);
+            }
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void QuestionIndexSelected(object sender, RoutedEventArgs e)
         {
-            currentQuestionIndex++;
+            currentQuestionIndex = (int)(sender as Button)!.Tag;
             ShowQuestion();
         }
 
-        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void ChoiseSelected(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Right)
-            {
-                currentQuestionIndex++;
-                ShowQuestion();
-            }
-            if (e.Key == Key.Left)
-            {
-                currentQuestionIndex--;
-                ShowQuestion();
-            }
+            var button = (Button)sender;
+            var bag = button.DataContext as Choice;
+            if (bag.Answer)
+                button.Background = new SolidColorBrush(Colors.LightGreen);
+            else
+                button.Background = new SolidColorBrush(Colors.Red);
         }
     }
 }
