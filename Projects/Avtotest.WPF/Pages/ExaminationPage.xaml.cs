@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -48,7 +49,6 @@ namespace Avtotest.WPF.Pages
                 ChoicesPanel.Children.Add(button);
             }
         }
-
         private void GenerateQuestionIndexButtons()
         {
             for (int i = 0; i < 20; i++)
@@ -71,7 +71,7 @@ namespace Avtotest.WPF.Pages
         private void ChoiseSelected(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
-            var bag = button.DataContext as Choice;
+            var bag = (Choice)button.DataContext;
             if (bag.Answer)
                 button.Background = new SolidColorBrush(Colors.LightGreen);
             else

@@ -33,6 +33,12 @@ namespace Avtotest.WPF
                 case EPage.Examination:
                     MainFrame.Navigate(new ExaminationPage());
                     break;
+                case EPage.Tickets: 
+                    MainFrame.Navigate(new TicketsPage());
+                    break;
+                case EPage.Main: 
+                    MainFrame.Navigate(new MainMenuPage());
+                    break;
             }
         }
     }
