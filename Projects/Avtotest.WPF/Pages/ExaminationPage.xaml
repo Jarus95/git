@@ -14,19 +14,22 @@
             <Setter Property="Margin" Value="10,0,10,10"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Height" Value="30"/>
+            <Setter Property="Opacity" Value="0"/>
             <Setter Property="Content" Value="{Binding Text}"></Setter>
         </Style>
         <Style x:Key="QuestionIndexButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="30"/>
+            <Setter Property="Opacity" Value="0"/>
         </Style>
     </Page.Resources>
 
     <Grid>
         <StackPanel Name="QuestionPanel">
             <ScrollViewer  Margin="5" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible">
-                <StackPanel Name="QuestionsIndexPanel" Orientation="Horizontal"/>
+                <StackPanel Name="QuestionsIndexPanel" Orientation="Horizontal">
+                </StackPanel>
             </ScrollViewer>
 
             <Image VerticalAlignment="Top" Name="questionImage" Height="300" Margin="10,10,10,10" Width="380"/>
