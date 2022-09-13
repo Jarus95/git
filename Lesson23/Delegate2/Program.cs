@@ -1,4 +1,6 @@
-﻿Calculate cal = Sum;
+﻿using Delegate2;
+
+Calculate cal = Sum;
 
 var sum = cal(2, 4);
 
@@ -18,4 +20,7 @@ int Divide(int a, int b)
     return a / b;
 }
 
-delegate int Calculate(int a, int b);
+namespace Delegate2
+{
+    delegate int Calculate(int a, int b);
+}

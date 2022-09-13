@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace Avtotest.WPF.Models;
+﻿namespace Avtotest.Data.Models;
 
 public class Ticket
 {
-    public long ChatId { get; set; }
     public int Index { get; set; }
+    public string Text { get; set; }
     public int QuestionsCount { get; set; }
     public int CorrectAnswersCount { get; set; }
-    public Queue<QuestionEntity> Questions { get; set; }
+    public List<QuestionEntity> Questions { get; set; }
 
     public bool IsCompleted
     {
@@ -26,20 +24,24 @@ public class Ticket
         }
     }
 
-    public Ticket(long chatId, Queue<QuestionEntity> questions)
+    public Ticket(List<QuestionEntity> questions)
     {
-        ChatId = chatId;
         QuestionsCount = questions.Count;
         CorrectAnswersCount = 0;
         Questions = questions;
     }
 
-    public Ticket(long chatId, int index, Queue<QuestionEntity> questions)
+    public Ticket(int index, List<QuestionEntity> questions)
     {
-        ChatId = chatId;
         QuestionsCount = questions.Count;
         CorrectAnswersCount = 0;
         Questions = questions;
+        Index = index;
+    }
+
+    public Ticket(int index, string text)
+    {
+        Text = text;
         Index = index;
     }
 }

@@ -29,6 +29,13 @@ public class ExaminationsService
         return ticket;
     }
 
+    public Queue<QuestionEntity> CreateExamTicket()
+    {
+        int randomNumber = new Random().Next(0, Database.Db.QuestionsDb.Questions.Count / TicketsSettings.TicketQuestionsCount);
+        var questions = Database.Db.QuestionsDb.CreateTicket(randomNumber * TicketsSettings.TicketQuestionsCount, TicketsSettings.TicketQuestionsCount);
+        return new Queue<QuestionEntity>(questions);
+    }
+
     private void DisplayTicket(User user, Ticket ticket)
     {
         var message = $"Exam started\n Questions count: {ticket.QuestionsCount}";
@@ -112,10 +119,4 @@ public class ExaminationsService
         user.SetStep(EUserStep.Menu);
     }
 
-    public Queue<QuestionEntity> CreateExamTicket()
-    {
-        int randomNumber = new Random().Next(0, Database.Db.QuestionsDb.Questions.Count / TicketsSettings.TicketQuestionsCount);
-        var questions = Database.Db.QuestionsDb.CreateTicket(randomNumber * TicketsSettings.TicketQuestionsCount, TicketsSettings.TicketQuestionsCount);
-        return new Queue<QuestionEntity>(questions);
-    }
 }

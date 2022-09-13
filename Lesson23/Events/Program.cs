@@ -21,4 +21,7 @@ void Save(string message)
 }
 
 
-delegate void LogDelegate(string message);
+namespace Events
+{
+    delegate void LogDelegate(string message);
+}

@@ -41,5 +41,10 @@ namespace Avtotest.WPF
                     break;
             }
         }
+
+        public void DisplayTicketPage(int ticketIndex)
+        {
+            MainFrame.Navigate(new ExaminationPage(ticketIndex));
+        }
     }
 }

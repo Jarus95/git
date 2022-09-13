@@ -16,7 +16,7 @@
         <ControlTemplate x:Key="TicketButtonTemplate" TargetType="Button">
             <Button Style="{StaticResource TicketButtonStyle}">
                 <DockPanel Width="300">
-                    <Label HorizontalAlignment="Left" Content="{Binding Ticket.Text}"></Label>
+                    <Label HorizontalAlignment="Left" Content="{Binding Text}"></Label>
                 </DockPanel>
             </Button>
         </ControlTemplate>

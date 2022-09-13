@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Shared\Avtotest.Data\Avtotest.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Pages\car.png" />
   </ItemGroup>
 

@@ -26,7 +26,9 @@
     </Page.Resources>
 
     <Grid>
-        <StackPanel Name="QuestionPanel">
+        <Label Name="TicketLabel" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"  Height="30" Content="Ticket1"></Label>
+        <Label Name="Timer" FontSize="18" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Top"  Height="30" Content="15:00"></Label>
+        <StackPanel Margin="30" Name="QuestionPanel" Visibility="Visible">
             <ScrollViewer  Margin="5" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible">
                 <StackPanel Name="QuestionsIndexPanel" Orientation="Horizontal">
                 </StackPanel>
@@ -37,6 +39,14 @@
             <StackPanel  Name="ChoicesPanel">
                 <Button Content="Variant 1" Margin="10,0,10,10" FontSize="16" Height="40" FontWeight="SemiBold" Background="#FFCC9B9B"></Button>
             </StackPanel>
+            <Button Click="CloseTicket" Height="30" Width="300" Content="Close"></Button>
+        </StackPanel>
+        <StackPanel Margin="30" Name="ExamResultPanel" Visibility="Hidden">
+            <Label Content="Total Questions: "></Label>
+            <TextBox Text="{Binding QuestionsCount}"></TextBox>
+            <Label Content="Correct Answers: "></Label>
+            <TextBox Text="{Binding CorrectAnswersCount}"></TextBox>
+            <Button Margin="30" Width="300" Height="40" Content="Close" Click="ButtonBase_OnClick"></Button>
         </StackPanel>
     </Grid>
 </Page>

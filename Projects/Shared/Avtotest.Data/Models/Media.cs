@@ -1,4 +1,4 @@
-﻿namespace Avtotest.WPF.Models;
+﻿namespace Avtotest.Data.Models;
 
 public class Media
 {

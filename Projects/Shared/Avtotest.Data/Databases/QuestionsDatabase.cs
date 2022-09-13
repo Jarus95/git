@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Avtotest.WPF.Models;
+﻿using Avtotest.Data.Models;
 
-namespace Avtotest.WPF.Databases;
+namespace Avtotest.Data.Databases;
 
 public class QuestionsDatabase
 {
