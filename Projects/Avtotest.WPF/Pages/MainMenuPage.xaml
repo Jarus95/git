@@ -46,11 +46,33 @@
     </Page.Resources>
         
     <Grid>
-        <StackPanel VerticalAlignment="Bottom" Name="panel" Margin="20">
+        <Label HorizontalAlignment="Center" FontSize="60" Content="Avtotest">
+            <Label.Foreground>
+                <LinearGradientBrush>
+                    <GradientStop Color="Aqua" Offset="0.0" />
+                    <GradientStop x:Name="c1" Color="Black" Offset="0.5" />
+                    <GradientStop Color="Red" Offset="1.0" />
+                </LinearGradientBrush>
+            </Label.Foreground>
+            <Label.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation 
+                                Storyboard.TargetName="c1"
+                                Storyboard.TargetProperty="Offset"
+                                From="0.3" To="0.6" Duration="0:0:1"
+                                RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Label.Triggers>
+        </Label>
+        <StackPanel VerticalAlignment="Bottom" Name="panel" Margin="20,60,20,20">
             <Image Height="400" Source="/Pages/car.png" ></Image>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,30">
-                <TextBlock Width="230" FontSize="18">365/700</TextBlock>
-                <TextBlock Width="230" FontSize="18" TextAlignment="Right">12/35</TextBlock>
+                <TextBlock Name="QuestionsStatus" Width="230" FontSize="18">365/700</TextBlock>
+                <TextBlock x:Name="TicketStatus" Width="230" FontSize="18" TextAlignment="Right">12/35</TextBlock>
             </StackPanel>
             <Button Click="ShowTickets" Style="{StaticResource MenuButtonStyle}" Content="Tickets"/>
             <Button Click="StartExamination" Style="{StaticResource MenuButtonStyle}" Content="Examination"/>

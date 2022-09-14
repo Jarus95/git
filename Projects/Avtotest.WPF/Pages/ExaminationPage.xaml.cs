@@ -17,6 +17,10 @@ namespace Avtotest.WPF.Pages
     public partial class ExaminationPage : Page
     {
         private Ticket CurrentTicket;
+        private int currentQuestionIndex = 0;
+
+        private int timeLimit = 900;
+        private DispatcherTimer timer;
 
         public ExaminationPage(int? ticketIndex = null)
         {
@@ -35,8 +39,6 @@ namespace Avtotest.WPF.Pages
             InitTimer();
         }
 
-        private int timeLimit = 900;
-        private DispatcherTimer timer;
         private void InitTimer()
         {
             timer = new DispatcherTimer
@@ -58,8 +60,6 @@ namespace Avtotest.WPF.Pages
                 timer.Stop();
             }
         }
-
-        private int currentQuestionIndex = 0;
 
         private void SetImage(string imageName)
         {
@@ -91,6 +91,22 @@ namespace Avtotest.WPF.Pages
             {
                 var button = new Button();
                 button.Style = FindResource("ChoiceButtonStyle") as Style;
+
+                if (question.IsCompleted)
+                {
+                    if (question.Choices[i].IsSelected)
+                    {
+                        if (question.Choices[i].Answer)
+                        {
+                            button.Background = new SolidColorBrush(Colors.LightGreen);
+                        }
+                        else
+                        {
+                            button.Background = new SolidColorBrush(Colors.Red);
+                        }
+                    }
+                }
+                
                 button.Click += ChoiseSelected;
                 button.DataContext = question.Choices[i];
 
@@ -111,6 +127,12 @@ namespace Avtotest.WPF.Pages
                 button.Content = i + 1;
                 button.Tag = i;
                 button.Click += QuestionIndexSelected;
+
+                if (i==0)
+                {
+                    button.Background = new SolidColorBrush(Colors.Aqua);
+                }
+
                 QuestionsIndexPanel.Children.Add(button);
 
                 animTime += 100;
@@ -152,8 +174,15 @@ namespace Avtotest.WPF.Pages
 
         private void QuestionIndexSelected(object sender, RoutedEventArgs e)
         {
-            currentQuestionIndex = (int)(sender as Button)!.Tag;
+            var button = sender as Button;
+            (QuestionsIndexPanel.Children[currentQuestionIndex] as Button)!.Background =
+                new SolidColorBrush(Color.FromRgb(221,221,221));
+
+            currentQuestionIndex = (int)button!.Tag;
             ShowQuestion();
+
+            //set this button background = blue
+            button.Background = new SolidColorBrush(Colors.Aqua);
         }
 
         private void ChoiseSelected(object sender, RoutedEventArgs e)
@@ -161,8 +190,8 @@ namespace Avtotest.WPF.Pages
             if (CurrentTicket.Questions[currentQuestionIndex].IsCompleted) return;
 
             var button = (Button)sender;
-            var bag = (Choice)button.DataContext;
-            if (bag.Answer)
+            var choice = (Choice)button.DataContext;
+            if (choice.Answer)
             {
                 button.Background = new SolidColorBrush(Colors.LightGreen);
                 CurrentTicket.CorrectAnswersCount++;
@@ -173,6 +202,7 @@ namespace Avtotest.WPF.Pages
                 button.Background = new SolidColorBrush(Colors.Red);
                 (QuestionsIndexPanel.Children[currentQuestionIndex] as Button)!.Background = new SolidColorBrush(Colors.Red);
             }
+            choice.IsSelected = true;
 
             CurrentTicket.Questions[currentQuestionIndex].IsCompleted = true;
         }

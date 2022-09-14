@@ -6,10 +6,6 @@
         xmlns:local="clr-namespace:Avtotest.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="540" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-
-    </Window.Resources>
-
     <Grid>
         <Frame NavigationUIVisibility="Hidden"  Name="MainFrame"></Frame>
     </Grid>

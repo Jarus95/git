@@ -44,8 +44,20 @@ public partial class TicketsPage : Page
 
     private void StartTicket(object sender, RoutedEventArgs e)
     {
-        var data = (Ticket)(sender as Button)!.DataContext;
-        MainWindow.Instance.DisplayTicketPage(data.Index);
+        var ticket = (Ticket)(sender as Button)!.DataContext;
+
+        if (Database.Db.TicketDb.UserTickets.Any(t=>t.Index == ticket.Index))
+        {
+            var modalWindow = new ModalWindow();
+            var result = modalWindow.ShowDialog();
+            if (result == true)
+            {
+                MainWindow.Instance.DisplayTicketPage(ticket.Index);
+            }
+            return;
+        }
+
+        MainWindow.Instance.DisplayTicketPage(ticket.Index);
     }
 
     private void MainMenu(object sender, RoutedEventArgs e)

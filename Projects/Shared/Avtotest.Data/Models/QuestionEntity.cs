@@ -7,6 +7,5 @@ public class QuestionEntity
     public string Description { get; set; }
     public List<Choice> Choices { get; set; }
     public Media Media { get; set; }
-
     public bool IsCompleted { get; set; }
 }
