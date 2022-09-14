@@ -13,12 +13,12 @@ animalList.Add(cow);
 
 /*CowType cowType = new CowType();
 cowType.Tail = 2;
-cowType.Name = "sigir";
+cowType.Name ="sigir";
 Cow cowT = cowType;
 System.Console.WriteLine(cowT.Tail);*/
 
-foreach (var anim in animalList)
-    System.Console.WriteLine(anim);
+foreach(var anim in animalList)
+System.Console.WriteLine(anim);
 //hoz bu yerda yana animal classidagi sound kelib qolyabdi.Dogning soundini ignore qilyabdi.
 //Buning yechimi uchun esa Animal class idagi elementga virtual suzini qushib yozishimiz kk
 //shunda biz undan hosil qilingan classga override keyini qushib yozsak yuqoridagi muammo ketadi
@@ -57,7 +57,7 @@ abstract class Animal// bu classdan obyekt olishimiz mumkin emas.Bu mantiqqa va 
 {
     public string Name;
     public int Age;
-    public virtual void Sound()//virtuala key --> dericed class larda override key orqali o'zgartirish uchun foydalanamiz
+    public  virtual void Sound()//virtuala key --> dericed class larda override key orqali o'zgartirish uchun foydalanamiz
     //allows to change the field of base class in derived class
     {
         System.Console.WriteLine("Animal Sound.....");

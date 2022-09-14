@@ -8,17 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-=======
-    <None Remove="1.png" />
-    <None Remove="2.png" />
+    <None Remove="Pages\car.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="1.png" />
-    <Resource Include="2.png" />
->>>>>>> 895c5eb3f6813203dc489fd63f7575c4aee6870e
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Avtotest.Data\Avtotest.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Pages\car.png" />
   </ItemGroup>
 
 </Project>
