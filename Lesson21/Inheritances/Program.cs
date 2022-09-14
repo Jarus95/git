@@ -1,11 +1,9 @@
-﻿using Inheritances;
-
 Dog dog1 = new Dog();
 dog1.Name = "Name1";
 
 Cow cow1 = new Cow();
 cow1.Name = "Cow1";
-cow1.Tail = 2;
+cow1.Tail =2;
 
 //Dog va Cow ning zamiridagi class animal bulgani uchun biz uni quidagi holatda yozishimiz mumkin.
 //YA'ni Animal class Dog va Cow classlari uchun Base classi bulganligi sababli ham shu kurinishda yozish mumkin
@@ -20,14 +18,6 @@ Animal animal2 = new Cow();
 Animal animal1 = cow1;
 System.Console.WriteLine(animal1.Name);
 
-<<<<<<< HEAD
-namespace Inheritances
-{
-    class Cow : Animal
-    {
-        public int Horn;
-        public int Tail;
-=======
 
 // Bu class bir nechta elementlari Animal bilan bir xil bugani uchun 
 // bu elementlarni biz Animaldan olishimiz mumkin.
@@ -53,29 +43,10 @@ class Animal
     public void Sound()
     {
         System.Console.WriteLine("Animal Sound.....");
->>>>>>> 895c5eb3f6813203dc489fd63f7575c4aee6870e
     }
 
-    class Dog : Animal
+    public void Eat()
     {
-<<<<<<< HEAD
-    
-    }
-
-    class Animal
-    {
-        public string Name;
-        public int Age;
-
-        public void Sound()
-        {
-        }
-
-        public void Eat()
-        {
-        }
-=======
         System.Console.WriteLine("I am eating.....");
->>>>>>> 895c5eb3f6813203dc489fd63f7575c4aee6870e
     }
 }
