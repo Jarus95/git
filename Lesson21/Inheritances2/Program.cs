@@ -1,15 +1,8 @@
-﻿// Animal animal = new Animal();//cannot create obj from abstact class
+// Animal animal = new Animal();//cannot create obj from abstact class
 // animal.Sound();
 
-<<<<<<< HEAD
-using Inheritances2;
-
-Cow cow1 = new Cow();
-//cow1.Sound();
-=======
 Cow cow = new Cow();
 cow.Sound();
->>>>>>> 895c5eb3f6813203dc489fd63f7575c4aee6870e
 
 Dog dog = new Dog();
 dog.Sound();
@@ -18,11 +11,11 @@ List<Animal> animalList = new List<Animal>();
 animalList.Add(dog);
 animalList.Add(cow);
 
-// CowType cowType = new CowType();
-// cowType.Tail = 2;
-// cowType.Name ="sigir";
-// Cow cowT = cowType;
-// System.Console.WriteLine(cowT.Tail);
+/*CowType cowType = new CowType();
+cowType.Tail = 2;
+cowType.Name = "sigir";
+Cow cowT = cowType;
+System.Console.WriteLine(cowT.Tail);*/
 
 foreach (var anim in animalList)
     System.Console.WriteLine(anim);
@@ -36,60 +29,6 @@ animDog.Sound();
 //Ya'ni undan voris ololmaysan
 sealed class Cow : Animal
 
-<<<<<<< HEAD
-foreach (var animal in animals)
-{
-    animal.Sound();
-}
-
-namespace Inheritances2
-{
-    class CowType : Cow
-    {
-        public override void Sound()
-        {
-            Console.WriteLine("Cowtype sound");
-        }
-    }
-
-    class Cow : Animal
-    {
-        public int Horn;
-        public int Tail;
-
-        public override  void Sound()
-        {
-            Console.WriteLine("Cow sound");
-        }
-    }
-
-// sealed - can not use as base class
-    sealed class Dog : Animal
-    {
-        //to change this from base class
-        public override void Sound()
-        {
-            Console.WriteLine("Bark...");
-        }
-    }
-
-// abstract - can not creat obj from abstract class
-    abstract class Animal
-    {
-        public string Name;
-        public int Age;
-
-        //allows to change this in drived class
-        public virtual void Sound()
-        {
-            Console.WriteLine("Animal sound...");
-        }
-
-        public void Eat()
-        {
-            Console.WriteLine("I'm eating...");
-        }
-=======
 {
     public int Horn;
     public int Tail;
@@ -127,6 +66,5 @@ abstract class Animal// bu classdan obyekt olishimiz mumkin emas.Bu mantiqqa va 
     public void Eat()
     {
         System.Console.WriteLine("I am eating.....");
->>>>>>> 895c5eb3f6813203dc489fd63f7575c4aee6870e
     }
 }
