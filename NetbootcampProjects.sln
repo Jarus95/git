@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avtotest.Data", "Projects\S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{8529FB8C-E1C1-4541-BC94-376B32D4D6D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autotest.Wpf", "Projects\Autotest.Wpf\Autotest.Wpf.csproj", "{43007BB4-DE74-4E7F-BB31-565766FD78BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{E5560FF0-ECB4-477F-9DAD-51DB7DB09BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5560FF0-ECB4-477F-9DAD-51DB7DB09BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5560FF0-ECB4-477F-9DAD-51DB7DB09BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43007BB4-DE74-4E7F-BB31-565766FD78BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43007BB4-DE74-4E7F-BB31-565766FD78BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43007BB4-DE74-4E7F-BB31-565766FD78BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43007BB4-DE74-4E7F-BB31-565766FD78BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +53,7 @@ Global
 		{7068803F-EC49-4D9F-A7F1-CCFD6F897F11} = {5E2AB63C-2FBA-4D7C-BB17-DB333E2DB535}
 		{E5560FF0-ECB4-477F-9DAD-51DB7DB09BCD} = {8529FB8C-E1C1-4541-BC94-376B32D4D6D4}
 		{8529FB8C-E1C1-4541-BC94-376B32D4D6D4} = {5E2AB63C-2FBA-4D7C-BB17-DB333E2DB535}
+		{43007BB4-DE74-4E7F-BB31-565766FD78BD} = {5E2AB63C-2FBA-4D7C-BB17-DB333E2DB535}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65978E2F-7839-44B5-919D-350F173CF1EB}

@@ -4,7 +4,6 @@ using Avtotest.Data.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -52,11 +51,11 @@ namespace Avtotest.WPF.Pages
         void Timer_Tick(object sender, EventArgs e)
         {
             var time = --timeLimit;
-            Timer.Content = $"{time/60}:{time%60}";
+            Timer.Content = $"{time / 60}:{time % 60}";
 
             if (timeLimit == 0)
             {
-                CloseTicket(null,null);
+                CloseTicket(null, null);
                 timer.Stop();
             }
         }
@@ -106,7 +105,7 @@ namespace Avtotest.WPF.Pages
                         }
                     }
                 }
-                
+
                 button.Click += ChoiseSelected;
                 button.DataContext = question.Choices[i];
 
@@ -128,7 +127,7 @@ namespace Avtotest.WPF.Pages
                 button.Tag = i;
                 button.Click += QuestionIndexSelected;
 
-                if (i==0)
+                if (i == 0)
                 {
                     button.Background = new SolidColorBrush(Colors.Aqua);
                 }
@@ -171,18 +170,20 @@ namespace Avtotest.WPF.Pages
             btn.BeginAnimation(Button.OpacityProperty, animOpacity);
             btn.BeginAnimation(Button.MarginProperty, animLeft);
         }
-
+        
         private void QuestionIndexSelected(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            (QuestionsIndexPanel.Children[currentQuestionIndex] as Button)!.Background =
-                new SolidColorBrush(Color.FromRgb(221,221,221));
+            if (!CurrentTicket.Questions[currentQuestionIndex].IsCompleted)
+                (QuestionsIndexPanel.Children[currentQuestionIndex] as Button)!.Background =
+                    new SolidColorBrush(Color.FromRgb(221, 221, 221));
 
             currentQuestionIndex = (int)button!.Tag;
             ShowQuestion();
 
             //set this button background = blue
-            button.Background = new SolidColorBrush(Colors.Aqua);
+            if (!CurrentTicket.Questions[currentQuestionIndex].IsCompleted)
+                button.Background = new SolidColorBrush(Colors.Aqua);
         }
 
         private void ChoiseSelected(object sender, RoutedEventArgs e)
