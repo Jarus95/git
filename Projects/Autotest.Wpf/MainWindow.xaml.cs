@@ -1,6 +1,6 @@
 ﻿using Autotest.Wpf.Pages;
 using System.Windows;
-using System.Windows.Controls;
+using Avtotest.Database;
 
 namespace Autotest.Wpf;
 
@@ -16,5 +16,4 @@ public partial class MainWindow : Window
         var menuPage = new MenuPage();
         MainFrame.Navigate(menuPage);
     }
-
 }

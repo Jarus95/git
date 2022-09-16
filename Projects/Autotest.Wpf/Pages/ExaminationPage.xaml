@@ -11,8 +11,8 @@
     <Grid>
         <Label Name="Title" VerticalAlignment="Top" HorizontalAlignment="Center" Height="30" FontSize="16" Content="Examination"></Label>
         <StackPanel Margin="0,30,0,60">
-            <Image Width="200" Height="200" Source="/Pages/car.png"></Image>
-            <Label Margin="20" FontSize="16" Content="1. Savol quyidagicha?"></Label>
+            <Image Name="QuestionImage" Width="200" Height="200" Source="/Pages/car.png"></Image>
+            <Label Name="QuesitonText" Margin="20" FontSize="16" Content="1. Savol quyidagicha?"></Label>
             <StackPanel Name="ChoicePanel">
             </StackPanel>
         </StackPanel>

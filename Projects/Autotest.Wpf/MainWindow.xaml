@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="500" Background="Aqua" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Margin="10"></Frame>
+        <Frame NavigationUIVisibility="Hidden" Name="MainFrame"></Frame>
     </Grid>
 </Window>

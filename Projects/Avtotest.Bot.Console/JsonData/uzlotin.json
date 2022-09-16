@@ -3,7 +3,10 @@
     "id": 1,
     "question": "Qaysi avtomobil uchun bu belgilarning ta'sir oralig'ida to'xtashga ruxsat etiladi?",
     "choices": [
-      { "text": "Qizilga", "answer": false },
+      { 
+        "text": "Qizilga", 
+        "answer": false 
+      },
       { "text": "Ikkala avtomobilga", "answer": false },
       { "text": "Hech qaysi biriga", "answer": false },
       {
@@ -11,7 +14,11 @@
         "answer": true
       }
     ],
-    "media": { "exist": true, "name": "1" },
+    "media": 
+    { 
+      "exist": true, 
+      "name": "1"
+    },
     "description": "YHQ 1-ilovasi 3-bo'limi 2-xatboshiga asosan, qoidalarning 174-bandiga ko'ra «Nogiron» taniqlik belgisi o'rnatilgan avtomobil va motokolyaskalarni boshqarayotgan nogiron haydovchilar 3.2, 3.3 va 3.28 belgilari talablaridan chetga chiqishlari mumkin. 7.18 qo'shimcha belgisi bo'lganda 3.27 belgisining ta'sir oralig'ida to'xtashga ruxsat etiladi."
   },
   {
