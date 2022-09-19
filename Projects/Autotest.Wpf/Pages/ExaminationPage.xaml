@@ -10,12 +10,18 @@
 
     <Grid>
         <Label Name="Title" VerticalAlignment="Top" HorizontalAlignment="Center" Height="30" FontSize="16" Content="Examination"></Label>
-        <StackPanel Margin="0,30,0,60">
-            <Image Name="QuestionImage" Width="200" Height="200" Source="/Pages/car.png"></Image>
-            <Label Name="QuesitonText" Margin="20" FontSize="16" Content="1. Savol quyidagicha?"></Label>
-            <StackPanel Name="ChoicePanel">
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
+            <StackPanel Name="TicketQuestionIndexButtonPanel" Orientation="Horizontal" VerticalAlignment="Top" Height="30">
             </StackPanel>
+        </ScrollViewer>
+        <StackPanel Margin="0,80,0,20">
+            <Image Name="QuestionImage" Width="200" Height="200" Source="/Pages/car.png"></Image>
+            <TextBlock Name="QuesitonText" Margin="20" FontSize="16" Text="1. Savol quyidagicha?" TextWrapping="Wrap"></TextBlock>
+            <ScrollViewer  MaxHeight="150">
+                <StackPanel Name="ChoicePanel">
+                </StackPanel>
+            </ScrollViewer>
         </StackPanel>
-        <Button Click="MenuButtonClick" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Menu" Width="100" Height="60"></Button>
+        <Button Click="MenuButtonClick" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Menu" Width="100" Height="30"></Button>
     </Grid>
 </Page>

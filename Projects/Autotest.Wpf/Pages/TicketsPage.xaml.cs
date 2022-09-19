@@ -8,18 +8,20 @@ public partial class TicketsPage : Page
     public TicketsPage()
     {
         InitializeComponent();
-
         GenerateTicketButtons();
     }
 
     private void GenerateTicketButtons()
     {
-        for (int i = 1; i < 21; i++)
+        var questionsRepository = MainWindow.Instance.QuestionsRepository;
+        int ticketsCount = questionsRepository.GetTicketsCount();
+
+        for (int i = 0; i < ticketsCount; i++)
         {
             var button = new Button();
             button.Width = 300;
             button.Height = 40;
-            button.Content = "Ticket" + i;
+            button.Content = "Ticket" + (i + 1);
             button.FontSize = 20;
             button.Click += TicketButtonClick;
             button.Tag = i;

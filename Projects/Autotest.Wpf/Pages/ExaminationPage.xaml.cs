@@ -1,25 +1,68 @@
-﻿using System;
+﻿using Avtotest.Database.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Avtotest.Database;
-using Avtotest.Database.Models;
 
 namespace Autotest.Wpf.Pages;
 
 public partial class ExaminationPage : Page
 {
-    public ExaminationPage(int? currentTicketIndex = null)
+    private int currentQuestionIndex = 0;
+    private Ticket currentTicket;
+
+    public ExaminationPage(int currentTicketIndex = -1)
     {
         InitializeComponent();
 
-        if (currentTicketIndex != null)
+        //set random ticket
+        if (currentTicketIndex <= -1)
         {
-            Title.Content = $"Ticket{currentTicketIndex}";
+            var random = new Random();
+
+            //0 dan 35gacha bolgan ixtiyoriy soni qaytaradi
+            currentTicketIndex = random.Next(0, MainWindow.Instance.QuestionsRepository.GetTicketsCount());
         }
 
+        Title.Content = $"Ticket{currentTicketIndex + 1}";
+        CreateTicket(currentTicketIndex);
+
+        //generate ticket question buttons 
+        GenerateTicketQuestionIndexButtons();
+
+        ShowQuestion();
+    }
+
+    private void CreateTicket(int ticketIndex)
+    {
+        var ticketQuestionsCount = MainWindow.Instance.QuestionsRepository.TicketQuestionsCount;
+        var from = ticketIndex * ticketQuestionsCount;
+        var ticketQuestions = MainWindow.Instance.QuestionsRepository.GetQuestionsRange(from, ticketQuestionsCount);
+        currentTicket = new Ticket(ticketIndex, ticketQuestions);
+    }
+
+    private void GenerateTicketQuestionIndexButtons()
+    {
+        for (int i = 0; i < currentTicket.QuestionsCount; i++)
+        {
+            var button = new Button();
+            button.Width = 30;
+            button.Height = 30;
+            button.Content = i + 1;
+            button.Click += TicketQuestionIndexButtonClick;
+            button.Tag = i;
+
+            TicketQuestionIndexButtonPanel.Children.Add(button);
+        }
+    }
+
+    private void TicketQuestionIndexButtonClick(object sender, RoutedEventArgs e)
+    {
+        var button = sender as Button;
+        currentQuestionIndex = (int)button.Tag;
         ShowQuestion();
     }
 
@@ -30,10 +73,9 @@ public partial class ExaminationPage : Page
 
     private void ShowQuestion()
     {
-        var questionsRepository = new QuestionsRepository();
-        var question = questionsRepository.Questions[2];
+        var question = currentTicket.Questions[currentQuestionIndex];
 
-        QuesitonText.Content = question.Question;
+        QuesitonText.Text = $"{currentQuestionIndex + 1}. {question.Question}";
 
         LoadQuestionImage(question.Media);
 
@@ -54,6 +96,7 @@ public partial class ExaminationPage : Page
 
     private void GenerateChoiceButtons(List<Choice> choices)
     {
+        ChoicePanel.Children.Clear();
         for (int i = 0; i < choices.Count; i++)
         {
             var choice = choices[i];
@@ -61,11 +104,17 @@ public partial class ExaminationPage : Page
             var button = new Button();
 
             button.Width = 300;
-            button.Height = 30;
+            button.MinHeight = 30;
             button.FontSize = 14;
-            button.Content = choice.Text;
             button.Click += ChoiceButtonClick;
             button.Tag = choice;
+
+            //button.Content = choice.Text;
+
+            var textBlock = new TextBlock();
+            textBlock.Text = choice.Text;
+            textBlock.TextWrapping = TextWrapping.Wrap;
+            button.Content = textBlock;
 
             ChoicePanel.Children.Add(button);
         }
@@ -76,13 +125,23 @@ public partial class ExaminationPage : Page
         var button = sender as Button;
         var choice = (Choice)button.Tag;
 
+        //set button bachground red or green
+
         if (choice.Answer)
         {
-            MessageBox.Show("Togri");
+            button.Background = new SolidColorBrush(Colors.LightGreen);
+            currentTicket.CorrectAnswersCount++;
         }
         else
         {
-            MessageBox.Show("Togri emas");
+            button.Background = new SolidColorBrush(Colors.Red);
+        }
+
+        currentTicket.SelectedQuestionIndexs.Add(currentQuestionIndex);
+
+        if (currentTicket.SelectedQuestionIndexs.Count == currentTicket.QuestionsCount)
+        {
+            MainWindow.Instance.MainFrame.Navigate(new ExaminationResultPage(currentTicket));
         }
     }
 }
