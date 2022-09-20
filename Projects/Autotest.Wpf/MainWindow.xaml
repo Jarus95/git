@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Autotest.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="500" Background="Aqua" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="600" Width="500" Background="Aqua" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Grid>
         <Frame NavigationUIVisibility="Hidden" Name="MainFrame"></Frame>
     </Grid>

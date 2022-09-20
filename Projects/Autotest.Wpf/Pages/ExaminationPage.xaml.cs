@@ -3,6 +3,7 @@ using Avtotest.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -111,11 +112,10 @@ public partial class ExaminationPage : Page
         ChoicePanel.Children.Clear();
         for (int i = 0; i < choices.Count; i++)
         {
-            
             var choice = choices[i];
-
             var button = new Button();
-            if (choice.IsSelected)
+
+            if (currentTicket.IsChoiceCompleted(currentQuestionIndex, i))
             {
                 if (choice.Answer)
                 {
@@ -128,6 +128,8 @@ public partial class ExaminationPage : Page
             button.MinHeight = 30;
             button.FontSize = 14;
             button.Click += ChoiceButtonClick;
+
+            choice.Index = i;
             button.Tag = choice;
             
             //button.Content = choice.Text;
@@ -143,7 +145,7 @@ public partial class ExaminationPage : Page
 
     private void ChoiceButtonClick(object sender, RoutedEventArgs e)
     {
-        if (currentTicket.Questions[currentQuestionIndex].IsCompleted) return;
+        if (currentTicket.IsQuestionCompleted(currentQuestionIndex)) return;
         var button = sender as Button;
         var choice = (Choice)button.Tag;
 
@@ -152,27 +154,36 @@ public partial class ExaminationPage : Page
         if (choice.Answer)
         {
             button.Background = new SolidColorBrush(Colors.LightGreen);
-            (TicketQuestionIndexButtonPanel.Children[currentQuestionIndex] as Button).Background = new SolidColorBrush(Colors.LightGreen);
+            (TicketQuestionIndexButtonPanel.Children[currentQuestionIndex] as Button)!.Background = new SolidColorBrush(Colors.LightGreen);
             currentTicket.CorrectAnswersCount++;
             MainWindow.Instance.CorrectCount++;
         }
         else
         {
             button.Background = new SolidColorBrush(Colors.Red);
-            (TicketQuestionIndexButtonPanel.Children[currentQuestionIndex] as Button).Background = new SolidColorBrush(Colors.Red);
+            (TicketQuestionIndexButtonPanel.Children[currentQuestionIndex] as Button)!.Background = new SolidColorBrush(Colors.Red);
         }
-        choice.IsSelected = true;// berilgan savolning variantlaridan biri tanlanganini ifodalaydi.
-       
+
         //Agar berilgan savolning variantlaridan biri tanlansa,
         //usha zahoti shu savolni IsCompletedini true qilib quyadi
         ////ya'ni usha savolga javob berilgan sifatoda saqlab qo'yadi
-        currentTicket.Questions[currentQuestionIndex].IsCompleted = true;
-        currentTicket.SelectedQuestionIndexs.Add(currentQuestionIndex);
+        currentTicket.SelectedQuestionIndexs.Add(new TicketData(currentQuestionIndex, choice.Index));
 
         if (currentTicket.SelectedQuestionIndexs.Count == currentTicket.QuestionsCount)
         {
             var ticketsRepository = MainWindow.Instance.TicketsRepository;
+
+            var isCompletedTicket = ticketsRepository.UserTickets.Any(ut => ut.Index == currentTicket.Index);
+            if (isCompletedTicket)
+            {
+                var oldTicket = ticketsRepository.UserTickets
+                    .First(ut => ut.Index == currentTicket.Index);
+
+                ticketsRepository.UserTickets.Remove(oldTicket);
+            }
+
             ticketsRepository.UserTickets.Add(currentTicket);
+
             MainWindow.Instance.MainFrame.Navigate(new ExaminationResultPage(currentTicket));
         }
     }

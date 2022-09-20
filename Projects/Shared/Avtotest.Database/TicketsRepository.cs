@@ -1,15 +1,41 @@
 ﻿using Avtotest.Database.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace Avtotest.Database
+namespace Avtotest.Database;
+
+public class TicketsRepository
 {
-    public class TicketsRepository
+    public List<Ticket> UserTickets = new List<Ticket>();
+
+    private const string Folder = "UserData";
+    private const string FileName = "usertickets.json";
+
+    public TicketsRepository()
     {
-        public List<Ticket> UserTickets = new List<Ticket>();
-        
+        ReadJsonData();
+    }
+
+    public void WriteToJson()
+    {
+        List<Ticket> ticketsData = UserTickets
+            .Select(t => new Ticket(t.Index, t.CorrectAnswersCount, t.QuestionsCount))
+            .ToList();
+
+        var jsonData = JsonConvert.SerializeObject(ticketsData);
+
+        if (!Directory.Exists(Folder))
+        {
+            Directory.CreateDirectory(Folder);
+        }
+
+        File.WriteAllText(Path.Combine(Folder, FileName), jsonData);
+    }
+
+    public void ReadJsonData()
+    {
+        if (!File.Exists(Path.Combine(Folder, FileName))) return;
+
+        var jsonData = File.ReadAllText(Path.Combine(Folder, FileName));
+        UserTickets = JsonConvert.DeserializeObject<List<Ticket>>(jsonData);
     }
 }

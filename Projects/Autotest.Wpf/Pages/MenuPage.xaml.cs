@@ -9,7 +9,7 @@ public partial class MenuPage : Page
     public MenuPage()
     {
         InitializeComponent();
-        var completedQuestionsCount = MainWindow.Instance.CorrectCount;
+        var completedQuestionsCount = MainWindow.Instance.TicketsRepository.UserTickets.Sum(t=>t.CorrectAnswersCount);
         var totalQuestionCount = MainWindow.Instance.QuestionsRepository.Questions.Count;
         QuestionStatus.Text = $"{completedQuestionsCount}/{totalQuestionCount}";
 

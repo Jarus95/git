@@ -20,7 +20,10 @@ public partial class MainWindow : Window
         TicketsRepository = new TicketsRepository();
         var menuPage = new MenuPage();
         MainFrame.Navigate(menuPage);
+    }
 
-        
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        TicketsRepository.WriteToJson();
     }
 }
