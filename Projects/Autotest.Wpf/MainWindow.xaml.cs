@@ -8,15 +8,19 @@ public partial class MainWindow : Window
 {
     public static MainWindow Instance;
     public QuestionsRepository QuestionsRepository;
+    public TicketsRepository TicketsRepository;
+    public int CorrectCount;
 
     public MainWindow()
     {
         InitializeComponent();
-        Instance = this;
 
+        Instance = this;
+        QuestionsRepository = new QuestionsRepository();
+        TicketsRepository = new TicketsRepository();
         var menuPage = new MenuPage();
         MainFrame.Navigate(menuPage);
 
-        QuestionsRepository = new QuestionsRepository();
+        
     }
 }

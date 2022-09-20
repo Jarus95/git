@@ -13,6 +13,10 @@
         <StackPanel Margin="60">
             <Button Click="TicketButtonClick" FontSize="16" Content="Tickets" Width="200" Height="80"></Button>
             <Button Click="ExaminationButtonClick" FontSize="16" Content="Examination" Width="200" Height="80"></Button>
+            <Grid>
+                <TextBlock x:Name="QuestionStatus" HorizontalAlignment="Left" Margin="10" FontSize="18" FontWeight="Bold" Padding="0 10 0 0" Height="40" Width="150" Background="DodgerBlue" Foreground="Snow" Text="123/700" VerticalAlignment="Center" TextAlignment="Center" />
+                <TextBlock x:Name="TicketStatus" HorizontalAlignment="Right" Margin="10" FontSize="18" FontWeight="Bold" Padding="0 10 0 0" Height="40" Width="150" Background="DodgerBlue" Foreground="Snow" Text="13/140" VerticalAlignment="Center" TextAlignment="Center" />
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>

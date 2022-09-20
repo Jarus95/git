@@ -7,12 +7,15 @@ public class QuestionEntity
     public string Description;
     public List<Choice> Choices;
     public Media Media;
+    public bool IsCompleted;
+    public bool IsCorrected;
 }
 
 public class Choice
 {
     public string Text;
     public bool Answer;
+    public bool IsSelected;
 }
 
 public class Media

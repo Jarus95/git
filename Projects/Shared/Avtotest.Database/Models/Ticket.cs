@@ -6,7 +6,13 @@ public class Ticket
     public int CorrectAnswersCount;
     public List<QuestionEntity> Questions;
     public List<int> SelectedQuestionIndexs;
-
+    public bool TicketCompleted
+    {
+        get
+        {
+            return CorrectAnswersCount == QuestionsCount;
+        }
+    }
     public int QuestionsCount
     {
         get

@@ -7,14 +7,26 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ExaminationPage">
-
+    <Page.Resources>
+        <Style x:Key="CurrentQuestionIndexButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="BorderBrush" Value="Yellow"/>
+            <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="Margin" Value="0 0 3 0"/>
+        </Style>
+        <Style x:Key="DefaultQuestionIndexButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="25"/>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Label Name="Title" VerticalAlignment="Top" HorizontalAlignment="Center" Height="30" FontSize="16" Content="Examination"></Label>
         <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
-            <StackPanel Name="TicketQuestionIndexButtonPanel" Orientation="Horizontal" VerticalAlignment="Top" Height="30">
+            <StackPanel Name="TicketQuestionIndexButtonPanel" Orientation="Horizontal" VerticalAlignment="Top"  Height="30">
             </StackPanel>
         </ScrollViewer>
-        <StackPanel Margin="0,80,0,20">
+        <StackPanel Margin="0,90,0,20">
             <Image Name="QuestionImage" Width="200" Height="200" Source="/Pages/car.png"></Image>
             <TextBlock Name="QuesitonText" Margin="20" FontSize="16" Text="1. Savol quyidagicha?" TextWrapping="Wrap"></TextBlock>
             <ScrollViewer  MaxHeight="150">

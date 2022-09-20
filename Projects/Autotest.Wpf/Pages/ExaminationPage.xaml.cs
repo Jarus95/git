@@ -1,4 +1,5 @@
-﻿using Avtotest.Database.Models;
+﻿using Avtotest.Database;
+using Avtotest.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,13 +49,19 @@ public partial class ExaminationPage : Page
     {
         for (int i = 0; i < currentTicket.QuestionsCount; i++)
         {
+           
             var button = new Button();
-            button.Width = 30;
-            button.Height = 30;
+            if (i == 0)
+            {
+                button.Style = FindResource("CurrentQuestionIndexButtonStyle") as Style;
+            }
+            else
+            {
+                button.Style = FindResource("DefaultQuestionIndexButtonStyle") as Style;
+            }
             button.Content = i + 1;
             button.Click += TicketQuestionIndexButtonClick;
             button.Tag = i;
-
             TicketQuestionIndexButtonPanel.Children.Add(button);
         }
     }
@@ -62,7 +69,12 @@ public partial class ExaminationPage : Page
     private void TicketQuestionIndexButtonClick(object sender, RoutedEventArgs e)
     {
         var button = sender as Button;
+        button.Style = FindResource("CurrentQuestionIndexButtonStyle") as Style;
+
+        var oldButton = TicketQuestionIndexButtonPanel.Children[currentQuestionIndex] as Button;
+        oldButton.Style = FindResource("DefaultQuestionIndexButtonStyle") as Style;
         currentQuestionIndex = (int)button.Tag;
+        
         ShowQuestion();
     }
 
@@ -99,16 +111,25 @@ public partial class ExaminationPage : Page
         ChoicePanel.Children.Clear();
         for (int i = 0; i < choices.Count; i++)
         {
+            
             var choice = choices[i];
 
             var button = new Button();
-
+            if (choice.IsSelected)
+            {
+                if (choice.Answer)
+                {
+                    button.Background = new SolidColorBrush(Colors.LightGreen);
+                }
+                else
+                    button.Background = new SolidColorBrush(Colors.Red);
+            }
             button.Width = 300;
             button.MinHeight = 30;
             button.FontSize = 14;
             button.Click += ChoiceButtonClick;
             button.Tag = choice;
-
+            
             //button.Content = choice.Text;
 
             var textBlock = new TextBlock();
@@ -122,6 +143,7 @@ public partial class ExaminationPage : Page
 
     private void ChoiceButtonClick(object sender, RoutedEventArgs e)
     {
+        if (currentTicket.Questions[currentQuestionIndex].IsCompleted) return;
         var button = sender as Button;
         var choice = (Choice)button.Tag;
 
@@ -130,17 +152,27 @@ public partial class ExaminationPage : Page
         if (choice.Answer)
         {
             button.Background = new SolidColorBrush(Colors.LightGreen);
+            (TicketQuestionIndexButtonPanel.Children[currentQuestionIndex] as Button).Background = new SolidColorBrush(Colors.LightGreen);
             currentTicket.CorrectAnswersCount++;
+            MainWindow.Instance.CorrectCount++;
         }
         else
         {
             button.Background = new SolidColorBrush(Colors.Red);
+            (TicketQuestionIndexButtonPanel.Children[currentQuestionIndex] as Button).Background = new SolidColorBrush(Colors.Red);
         }
-
+        choice.IsSelected = true;// berilgan savolning variantlaridan biri tanlanganini ifodalaydi.
+       
+        //Agar berilgan savolning variantlaridan biri tanlansa,
+        //usha zahoti shu savolni IsCompletedini true qilib quyadi
+        ////ya'ni usha savolga javob berilgan sifatoda saqlab qo'yadi
+        currentTicket.Questions[currentQuestionIndex].IsCompleted = true;
         currentTicket.SelectedQuestionIndexs.Add(currentQuestionIndex);
 
         if (currentTicket.SelectedQuestionIndexs.Count == currentTicket.QuestionsCount)
         {
+            var ticketsRepository = MainWindow.Instance.TicketsRepository;
+            ticketsRepository.UserTickets.Add(currentTicket);
             MainWindow.Instance.MainFrame.Navigate(new ExaminationResultPage(currentTicket));
         }
     }
