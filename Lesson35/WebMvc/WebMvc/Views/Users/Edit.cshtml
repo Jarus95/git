@@ -1,0 +1,9 @@
+﻿@model WebMvc.Models.User
+<form asp-controller="Users" asp-action="EditUser" method="post">
+    <label>Name</label><br>
+    <input type="text" name="Name" value="@Model.Name" /><br>
+    <label>Phone</label><br>
+    <input type="text" name="Phone" value="@Model.Phone" /><br>
+    <input type="number" name="Index" value="@Model.Index" /><br>
+    <input type="submit" name="Submit" />
+</form>
