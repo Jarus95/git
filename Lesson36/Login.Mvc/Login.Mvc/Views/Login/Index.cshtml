@@ -1,0 +1,12 @@
+﻿@using Login.Mvc.Services
+
+@{
+    var users = UsersRepository.Users;
+}
+
+<h1>UserName: @ViewBag.User.Name</h1>
+
+@foreach (var user in users)
+{
+    <p>@user.Name</p><br>
+}

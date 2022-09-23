@@ -1,0 +1,9 @@
+﻿<h1>Tizimga kirish</h1>
+
+<form asp-controller="Login" asp-action="UserSignin" method="post">
+    <input type="text" name="PhoneNumber" placeholder="PhoneNumber" /><br>
+    <input type="text" name="Password" placeholder="Password" /><br>
+    <input type="submit" value="Login" />
+</form>
+
+<a asp-controller="Login" asp-action="LoginNewUser">Signin</a>

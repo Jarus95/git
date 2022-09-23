@@ -1,0 +1,62 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model StaticFiles.Mvc.Models.QuestionEntity
+
+<h1>@Model.Question</h1>
+@{
+    var imageSource = $"{Model.Media.Name}.png";
+}
+
+<img src="~/Images/@imageSource" width="200px" height="auto"/>
+
+@{
+    <br>
+    <div class="choice-panel">
+    @for (int i = 0; i < Model.Choices.Count; i++)
+    {
+        var choice = Model.Choices[i];
+
+        if (ViewBag.ChoiceResult != null)
+        {
+            if (ViewBag.ChoiceIndex == i)
+            {
+                <a class="choice" style="background: red">
+                    @choice.Text
+                </a>
+            }
+            else
+            {
+                 <a class="choice">
+                     @choice.Text
+                 </a>
+            }
+        }
+        else
+        {
+            <a class="choice" asp-controller="Questions"
+               asp-action="Index"
+               asp-route-questionIndex=@Model.Id
+               asp-route-choiceIndex=@i>
+                @choice.Text
+            </a>
+        }
+        }
+    </div>
+}
+
+<style>
+    .choice {
+        background: aqua;
+        padding: 5px;
+        margin: 5px;
+        text-decoration: none;
+    }
+    .choice:hover {
+        background: aliceblue;
+    }
+    .choice-panel {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 300px;
+    }
+</style>
