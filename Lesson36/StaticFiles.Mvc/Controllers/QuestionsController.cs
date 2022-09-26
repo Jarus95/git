@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using StaticFiles.Mvc.Models;
 using StaticFiles.Mvc.Services;
 
@@ -7,14 +6,10 @@ namespace StaticFiles.Mvc.Controllers;
 
 public class QuestionsController : Controller
 {
-    public IActionResult Index(int? id, int? choiceIndex = null)
+    public IActionResult Index(int? index, int? choiceIndex = null)
     {
         var questionsData = new QuestionsRepository();
-        var question = questionsData.Questions.Find(q => q.Id == id);
-        if (question == null)
-        {
-            return View();
-        }
+        var question = questionsData.Questions.Find(q => q.Id == index);
 
         if (choiceIndex != null)
         {
